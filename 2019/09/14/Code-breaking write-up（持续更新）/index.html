@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Dopamine&#39;s Blog">
 <meta property="og:description" content="前言最近做了code-breaking的题，对我这种菜鸡来说还是挺难的，学到很多，记录一下。这是第一篇博客，希望以后努力产出吧，慢慢变强。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-10-06T15:19:02.432Z">
+<meta property="og:updated_time" content="2019-10-06T15:22:30.239Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Code-breaking write-up(持续更新)">
 <meta name="twitter:description" content="前言最近做了code-breaking的题，对我这种菜鸡来说还是挺难的，学到很多，记录一下。这是第一篇博客，希望以后努力产出吧，慢慢变强。">
@@ -324,8 +324,8 @@
 
 <p>反正…大概在做的事情就是限制输入的变量action不能为空吧。</p>
 <p>后面的正则，就是要求action的开头或者结尾有特殊字符又对函数名不造成影响，这里有个知识点，就是php的默认命名空间，引用p牛的话就是，php里默认命名空间是<code>\</code>，所有原生函数和类都在这个命名空间中。普通调用一个函数，如果直接写函数名<code>function_name()</code>调用，调用的时候其实相当于写了一个相对路径；而如果写<code>\function_name()</code> 这样调用函数，则其实是写了一个绝对路径。如果你在其他<code>namespace</code>里调用系统类，就必须写绝对路径这种写法。<br>所以这里刚好可以用<code>\</code>绕过正则。</p>
-<p>其实整道题我们的目的就是最终实现RCE，所以后面构造的函数尤为关键，目前我能想到的符合所给的格式，也就是第一个参数是参数，第二个参数是可执行的内容的，也就是<code>create_function()</code>了。关于这个函数如何实现代码注入可以看这篇<a href="https://blog.51cto.com/lovexm/1743442" target="_blank" rel="noopener">文章</a>。![对create_function的介绍](./Code-breaking write-up/1.png)</p>
-<p>参照文章所给的payload，尝试一下,成了![](./Code-breaking write-up/2.png)后面就简单了，也没啥过滤，直接构造payload读flag就行了。<br>附上payload：</p>
+<p>其实整道题我们的目的就是最终实现RCE，所以后面构造的函数尤为关键，目前我能想到的符合所给的格式，也就是第一个参数是参数，第二个参数是可执行的内容的，也就是<code>create_function()</code>了。关于这个函数如何实现代码注入可以看这篇<a href="https://blog.51cto.com/lovexm/1743442" target="_blank" rel="noopener">文章</a>。![对create_function的介绍](E:/hexo/myblog/source/_posts/Code-breaking write-up/1.png)</p>
+<p>参照文章所给的payload，尝试一下,成了![](E:/hexo/myblog/source/_posts/Code-breaking write-up/2.png)后面就简单了，也没啥过滤，直接构造payload读flag就行了。<br>附上payload：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?action=\create_function&amp;arg=<span class="number">2</span>;&#125;print_r(scandir(<span class="string">'../'</span>));<span class="comment">/*</span></span><br></pre></td></tr></table></figure>
 
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?action=\create_function&amp;arg=<span class="number">2</span>;&#125;print_r(file_get_contents(<span class="string">'../flag_h0w2execute_arb1trary_c0de'</span>));<span class="comment">/*</span></span><br></pre></td></tr></table></figure>
@@ -343,10 +343,10 @@
 <li>NFA（非确定性有限状态自动机）：从起始状态开始，一个字符一个字符地读取输入串，并与正则表达式进行匹配，如果匹配不上，则进行回溯，尝试其他状态</li>
 </ul>
 <p>NFA的执行过程中存在着回溯，所以性能会没有DFA好，但NFA的优点是支持更多功能，所以很多程序语言都在用NFA正则引擎，包括php使用的PCRE库。</p>
-<p>假设输入的字符是<code>&lt;?php phpinfo();//aaaaa</code>，来看一下正则匹配的过程：<br>![回溯过程](./Code-breaking write-up/3.png)可以看到，第四步的时候正则匹配到<code>.*</code>，既然是匹配任意多个字符，所以就直接匹配到了最后，即<code>&lt;?php phpinfo();//aaaaa</code>，但是在<code>.*</code>后面还有<code>[(`;?&gt;]</code>要匹配，最后的<code>//aaaaa</code>显然匹配不成功，所以就会开始回溯，也就是吐出一个<code>a</code>，然后依此类推回溯8次，到了12步，此时<code>.*</code>匹配的是<code>&lt;?php phpinfo()</code>，<code>[(`;?&gt;]</code>匹配的是<code>;</code>，这个结果满足了正则匹配的要求，于是不再回溯，13步继续往前执行，第二个<code>.*</code>就又匹配到了字符串结尾，结束匹配。</p>
+<p>假设输入的字符是<code>&lt;?php phpinfo();//aaaaa</code>，来看一下正则匹配的过程：<br>![回溯过程](E:/hexo/myblog/source/_posts/Code-breaking write-up/3.png)可以看到，第四步的时候正则匹配到<code>.*</code>，既然是匹配任意多个字符，所以就直接匹配到了最后，即<code>&lt;?php phpinfo();//aaaaa</code>，但是在<code>.*</code>后面还有<code>[(`;?&gt;]</code>要匹配，最后的<code>//aaaaa</code>显然匹配不成功，所以就会开始回溯，也就是吐出一个<code>a</code>，然后依此类推回溯8次，到了12步，此时<code>.*</code>匹配的是<code>&lt;?php phpinfo()</code>，<code>[(`;?&gt;]</code>匹配的是<code>;</code>，这个结果满足了正则匹配的要求，于是不再回溯，13步继续往前执行，第二个<code>.*</code>就又匹配到了字符串结尾，结束匹配。</p>
 <p>这个回溯的特点很有意思，而且也是这道题的关键，因为php为了防止正则表达式的拒绝服务攻击，给PCRE设置了回溯上限，可以通过<code>var_dump(ini_get(&#39;pcre.backtrack_limit&#39;));</code>查看当前环境的回溯上限值，我这里目前是100万。</p>
 <p>而当超过上限的时候，<code>preg_match</code>的返回值就不再是<code>1</code>或者<code>0</code>了，而是<code>false</code>，对于这道题来说刚好可以绕过正则的限制。</p>
-<p>所以显而易见，我们应该构造一个payload，使他超出回溯次数，实现RCE执行。<br>附上POC：<br>![执行脚本](./Code-breaking write-up/4.png)</p>
+<p>所以显而易见，我们应该构造一个payload，使他超出回溯次数，实现RCE执行。<br>附上POC：<br>![执行脚本](E:/hexo/myblog/source/_posts/Code-breaking write-up/4.png)</p>
 
       
     </div>
