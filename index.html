@@ -312,45 +312,15 @@
 
       
         
-          
-            <h4 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h4><p>CTF中一些misc题的套路就是一张图片里面隐写压缩包，再对压缩包和里面的文件花式处理，各种加密伪加密一起上。</p>
+          <h4 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h4><p>CTF中一些misc题的套路就是一张图片里面隐写压缩包，再对压缩包和里面的文件花式处理，各种加密伪加密一起上。</p>
 <p>加密的做了不少，有时候遇到伪加密，发觉自己很难判断，于是来学习一下。</p>
-<h4 id="0x01-ZIP文件结构"><a href="#0x01-ZIP文件结构" class="headerlink" title="0x01 ZIP文件结构"></a>0x01 ZIP文件结构</h4><p>zip文件格式是一种数据压缩和文档储存的文件格式。</p>
-<p>一个zip文件由三个部分组成：</p>
-<blockquote>
-<p>压缩源文件数据区+压缩源文件目录区+压缩源文件目录结束标志</p>
-</blockquote>
-<p>具体每一个部分的内容这篇<a href="https://blog.csdn.net/wclxyn/article/details/7288994" target="_blank" rel="noopener">文章</a>分析的十分详细，推荐阅读，我不再赘述了。</p>
-<p>这里随便拿一个压缩包，在winhex里打开：</p>
-<p>压缩源文件数据区的内容：</p>
-<p><img src="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200212205554.png" alt></p>
-<blockquote>
-<p>50 4B 03 04  文件头标记</p>
-<p>14 00  解压文件所需pkware版本</p>
-<p><strong>00 00</strong>  <strong>全局方式位标记</strong>  （有无加密）</p>
-</blockquote>
-<p>压缩源文件目录区的内容：</p>
-<p><img src="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200212210139.png" alt></p>
-<blockquote>
-<p>50 4B 01 02  目录中文件文件头标记</p>
-<p>1F 00  压缩使用的pkware版本</p>
-<p>14 00  解压文件所需pkware版本</p>
-<p><strong>00 00</strong>  <strong>全局方式位标记</strong>（有无加密，伪加密的关键判别标志）</p>
-</blockquote>
-<p>关于ZIP加密的信息，全部储存在<strong>全局方式位标记</strong>里，而压缩源文件数据区和压缩源文件目录区都有这4bytes的内容，在不同的情况下如何判别是否加密&amp;加密/伪加密呢？</p>
-<h4 id="0x02-如何判别ZIP是否为伪加密"><a href="#0x02-如何判别ZIP是否为伪加密" class="headerlink" title="0x02 如何判别ZIP是否为伪加密"></a>0x02 如何判别ZIP是否为伪加密</h4><p>首先，关于全局方式位标记的4bytes内容，只有第二个数字对加密与否有影响，其他的不管为什么值都无关紧要。第二个数字为奇数时，ZIP加密；第二个数字为偶数时，ZIP未加密。</p>
-<p>所谓伪加密，就是仅仅修改了压缩源文件目录区的全局方式位标记的第二个数字为奇数（一般都是9），这样在解压压缩包的时候会显示让你输入密码，可是实际上ZIP并未设置密码，所以我们想要成功解压，只要打开winhex把压缩源文件目录区的全局方式位标记的第二个数字改回<code>0</code>就可以了，这也是成功破解伪加密的方法。</p>
-<p>那么如何区别未加密/伪加密/真加密？</p>
-<h5 id="未加密"><a href="#未加密" class="headerlink" title="未加密"></a>未加密</h5><p>压缩源文件数据区的全局方式位标记为<code>00 00</code> </p>
-<p>压缩源文件目录区的全局方式位标记为<code>00 00</code></p>
-<h5 id="伪加密"><a href="#伪加密" class="headerlink" title="伪加密"></a>伪加密</h5><p>压缩源文件数据区的全局方式位标记为<code>00 00</code> </p>
-<p>压缩源文件目录区的全局方式位标记为<code>09 00</code></p>
-<h5 id="真加密"><a href="#真加密" class="headerlink" title="真加密"></a>真加密</h5><p>压缩源文件数据区的全局方式位标记为<code>09 00</code> </p>
-<p>压缩源文件目录区的全局方式位标记为<code>09 00</code></p>
-<h4 id="0x03-references"><a href="#0x03-references" class="headerlink" title="0x03 references"></a>0x03 references</h4><p><a href="https://blog.csdn.net/qq_26187985/article/details/83654197" target="_blank" rel="noopener">https://blog.csdn.net/qq_26187985/article/details/83654197</a></p>
-<p><a href="https://blog.csdn.net/wclxyn/article/details/7288994" target="_blank" rel="noopener">https://blog.csdn.net/wclxyn/article/details/7288994</a></p>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/02/12/ZIP伪加密/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>

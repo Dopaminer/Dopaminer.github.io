@@ -79,19 +79,19 @@
 
 
 
-<meta name="description" content="0x00 前言CTF中一些misc题的套路就是一张图片里面隐写压缩包，再对压缩包和里面的文件花式处理，各种加密伪加密一起上。 加密的做了不少，有时候遇到伪加密，发觉自己很难判断，于是来学习一下。 0x01 ZIP文件结构zip文件格式是一种数据压缩和文档储存的文件格式。 一个zip文件由三个部分组成：  压缩源文件数据区+压缩源文件目录区+压缩源文件目录结束标志  具体每一个部分的内容这篇文章分析">
+<meta name="description" content="0x00 前言CTF中一些misc题的套路就是一张图片里面隐写压缩包，再对压缩包和里面的文件花式处理，各种加密伪加密一起上。 加密的做了不少，有时候遇到伪加密，发觉自己很难判断，于是来学习一下。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ZIP伪加密">
 <meta property="og:url" content="https://dopaminer.github.io/2020/02/12/ZIP伪加密/index.html">
 <meta property="og:site_name" content="Dopamine&#39;s Blog">
-<meta property="og:description" content="0x00 前言CTF中一些misc题的套路就是一张图片里面隐写压缩包，再对压缩包和里面的文件花式处理，各种加密伪加密一起上。 加密的做了不少，有时候遇到伪加密，发觉自己很难判断，于是来学习一下。 0x01 ZIP文件结构zip文件格式是一种数据压缩和文档储存的文件格式。 一个zip文件由三个部分组成：  压缩源文件数据区+压缩源文件目录区+压缩源文件目录结束标志  具体每一个部分的内容这篇文章分析">
+<meta property="og:description" content="0x00 前言CTF中一些misc题的套路就是一张图片里面隐写压缩包，再对压缩包和里面的文件花式处理，各种加密伪加密一起上。 加密的做了不少，有时候遇到伪加密，发觉自己很难判断，于是来学习一下。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200212205554.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200212210139.png">
-<meta property="og:updated_time" content="2020-02-12T13:49:59.101Z">
+<meta property="og:updated_time" content="2020-02-12T14:03:56.151Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ZIP伪加密">
-<meta name="twitter:description" content="0x00 前言CTF中一些misc题的套路就是一张图片里面隐写压缩包，再对压缩包和里面的文件花式处理，各种加密伪加密一起上。 加密的做了不少，有时候遇到伪加密，发觉自己很难判断，于是来学习一下。 0x01 ZIP文件结构zip文件格式是一种数据压缩和文档储存的文件格式。 一个zip文件由三个部分组成：  压缩源文件数据区+压缩源文件目录区+压缩源文件目录结束标志  具体每一个部分的内容这篇文章分析">
+<meta name="twitter:description" content="0x00 前言CTF中一些misc题的套路就是一张图片里面隐写压缩包，再对压缩包和里面的文件花式处理，各种加密伪加密一起上。 加密的做了不少，有时候遇到伪加密，发觉自己很难判断，于是来学习一下。">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200212205554.png">
 
 
@@ -314,6 +314,8 @@
       
         <h4 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h4><p>CTF中一些misc题的套路就是一张图片里面隐写压缩包，再对压缩包和里面的文件花式处理，各种加密伪加密一起上。</p>
 <p>加密的做了不少，有时候遇到伪加密，发觉自己很难判断，于是来学习一下。</p>
+<a id="more"></a>
+
 <h4 id="0x01-ZIP文件结构"><a href="#0x01-ZIP文件结构" class="headerlink" title="0x01 ZIP文件结构"></a>0x01 ZIP文件结构</h4><p>zip文件格式是一种数据压缩和文档储存的文件格式。</p>
 <p>一个zip文件由三个部分组成：</p>
 <blockquote>
