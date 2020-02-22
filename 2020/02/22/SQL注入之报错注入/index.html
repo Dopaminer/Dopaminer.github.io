@@ -79,13 +79,13 @@
 
 
 
-<meta name="description" content="0x00 前言报错注入也就是利用报错信息查询到自己想要的内容。报错注入也有局限性，那就是要求页面必须对报错信息有回显。报错的方法非常多，前面写过一篇文章讲双查询注入的，理论上也属于报错注入的一种，所以在这里总结一下报错注入的多种姿势。 0x01 Error Based Injection1.数据溢出这里可以看到MYSQL对于整型的规范:  这里能表示的最大的数字也就是2的64次方-1，即18446">
+<meta name="description" content="0x00 前言报错注入也就是利用报错信息查询到自己想要的内容。报错注入也有局限性，那就是要求页面必须对报错信息有回显。报错的方法非常多，前面写过一篇文章讲双查询注入的，理论上也属于报错注入的一种，所以在这里总结一下报错注入的多种姿势。">
 <meta name="keywords" content="web">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SQL注入之报错注入">
 <meta property="og:url" content="https://dopaminer.github.io/2020/02/22/SQL注入之报错注入/index.html">
 <meta property="og:site_name" content="Dopamine&#39;s Blog">
-<meta property="og:description" content="0x00 前言报错注入也就是利用报错信息查询到自己想要的内容。报错注入也有局限性，那就是要求页面必须对报错信息有回显。报错的方法非常多，前面写过一篇文章讲双查询注入的，理论上也属于报错注入的一种，所以在这里总结一下报错注入的多种姿势。 0x01 Error Based Injection1.数据溢出这里可以看到MYSQL对于整型的规范:  这里能表示的最大的数字也就是2的64次方-1，即18446">
+<meta property="og:description" content="0x00 前言报错注入也就是利用报错信息查询到自己想要的内容。报错注入也有局限性，那就是要求页面必须对报错信息有回显。报错的方法非常多，前面写过一篇文章讲双查询注入的，理论上也属于报错注入的一种，所以在这里总结一下报错注入的多种姿势。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200222100706.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200222102230.png">
@@ -93,10 +93,10 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200222103916.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200222104316.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200222180715.png">
-<meta property="og:updated_time" content="2020-02-22T10:36:21.114Z">
+<meta property="og:updated_time" content="2020-02-22T10:41:57.342Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SQL注入之报错注入">
-<meta name="twitter:description" content="0x00 前言报错注入也就是利用报错信息查询到自己想要的内容。报错注入也有局限性，那就是要求页面必须对报错信息有回显。报错的方法非常多，前面写过一篇文章讲双查询注入的，理论上也属于报错注入的一种，所以在这里总结一下报错注入的多种姿势。 0x01 Error Based Injection1.数据溢出这里可以看到MYSQL对于整型的规范:  这里能表示的最大的数字也就是2的64次方-1，即18446">
+<meta name="twitter:description" content="0x00 前言报错注入也就是利用报错信息查询到自己想要的内容。报错注入也有局限性，那就是要求页面必须对报错信息有回显。报错的方法非常多，前面写过一篇文章讲双查询注入的，理论上也属于报错注入的一种，所以在这里总结一下报错注入的多种姿势。">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200222100706.png">
 
 
@@ -318,6 +318,8 @@
 
       
         <h4 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h4><p>报错注入也就是利用报错信息查询到自己想要的内容。报错注入也有局限性，那就是要求页面必须对报错信息有回显。报错的方法非常多，前面写过一篇文章讲双查询注入的，理论上也属于报错注入的一种，所以在这里总结一下报错注入的多种姿势。</p>
+<a id="more"></a>
+
 <h4 id="0x01-Error-Based-Injection"><a href="#0x01-Error-Based-Injection" class="headerlink" title="0x01 Error Based Injection"></a>0x01 Error Based Injection</h4><h5 id="1-数据溢出"><a href="#1-数据溢出" class="headerlink" title="1.数据溢出"></a>1.数据溢出</h5><p><a href="https://dev.mysql.com/doc/refman/8.0/en/integer-types.html" target="_blank" rel="noopener">这里</a>可以看到MYSQL对于整型的规范:</p>
 <p><img src="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200222100706.png" alt></p>
 <p>这里能表示的最大的数字也就是2的64次方-1，即<code>18446744073709551615</code>。但是不用这么麻烦，我们在MYSQL中用<code>~0</code>反运算就能得到最大的数字，而当最大的数进行加法运算，就会得到一个超限的数，导致溢出。</p>

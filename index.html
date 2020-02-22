@@ -312,42 +312,14 @@
 
       
         
-          
-            <h4 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h4><p>报错注入也就是利用报错信息查询到自己想要的内容。报错注入也有局限性，那就是要求页面必须对报错信息有回显。报错的方法非常多，前面写过一篇文章讲双查询注入的，理论上也属于报错注入的一种，所以在这里总结一下报错注入的多种姿势。</p>
-<h4 id="0x01-Error-Based-Injection"><a href="#0x01-Error-Based-Injection" class="headerlink" title="0x01 Error Based Injection"></a>0x01 Error Based Injection</h4><h5 id="1-数据溢出"><a href="#1-数据溢出" class="headerlink" title="1.数据溢出"></a>1.数据溢出</h5><p><a href="https://dev.mysql.com/doc/refman/8.0/en/integer-types.html" target="_blank" rel="noopener">这里</a>可以看到MYSQL对于整型的规范:</p>
-<p><img src="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200222100706.png" alt></p>
-<p>这里能表示的最大的数字也就是2的64次方-1，即<code>18446744073709551615</code>。但是不用这么麻烦，我们在MYSQL中用<code>~0</code>反运算就能得到最大的数字，而当最大的数进行加法运算，就会得到一个超限的数，导致溢出。</p>
-<p><img src="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200222102230.png" alt></p>
-<p>另外，官方文档表示，在mysql5.5之前，整型溢出不会报错，只有版本大于5.5.5以后，才会报错。</p>
-<p>另一个知识点是，当查询语句成功返回，其返回值其实为0，所以对这个返回值做逻辑非运算，则得到1，这个值是可以做整型运算的，如下：</p>
-<p><img src="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200222102327.png" alt></p>
-<p>结合前面可以构造报错语句：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> (<span class="keyword">select</span>(!x-~<span class="number">0</span>)<span class="keyword">from</span>(<span class="keyword">select</span>(<span class="keyword">select</span> <span class="keyword">user</span>())x)a);</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200222103916.png" alt></p>
-<p>同样的，<code>exp()</code>函数也有溢出错误。此函数是以e为底的指数函数，如果指数太大就会导致结果溢出，指数的上限是709</p>
-<p><img src="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200222104316.png" alt></p>
-<p>所以也可以构造注入语句：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">exp</span>(~(<span class="keyword">select</span>*<span class="keyword">from</span>(<span class="keyword">select</span> <span class="keyword">user</span>())x));</span><br></pre></td></tr></table></figure>
-
-<p>参考的文章说，在mysql&gt;5.5.53时，不能返回查询结果，但是我的mysql是5.7.11的，还是可以返回鸭…</p>
-<h5 id="2-xpath语法错误"><a href="#2-xpath语法错误" class="headerlink" title="2.xpath语法错误"></a>2.xpath语法错误</h5><p>从mysql5.1.5开始，提供两个XML查询和修改的函数</p>
-<blockquote>
-<p>extractvalue()：在xml文档中按照xpath语法查询节点内容</p>
-<p>updatexml()：修改查询到的内容</p>
-</blockquote>
-<p>这两个函数第二个参数的要求都是符合xpath的语法，而当不符合时，就会报错，可以利用其报错内容来显示出想要的数据。</p>
-<p>payload:</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> extractvalue(<span class="number">1</span>,<span class="keyword">concat</span>(<span class="number">0x7e</span>,(<span class="keyword">select</span> <span class="keyword">user</span>()),<span class="number">0x7e</span>));</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> updatexml(<span class="number">1</span>,<span class="keyword">concat</span>(<span class="number">0x7e</span>,(<span class="keyword">select</span> <span class="keyword">user</span>()),<span class="number">0x7e</span>),<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200222180715.png" alt></p>
-<h5 id="3-主键重复"><a href="#3-主键重复" class="headerlink" title="3.主键重复"></a>3.主键重复</h5><p>这一个点我单独写了一篇<a href="https://dopaminer.github.io/2020/02/06/SQL%E6%B3%A8%E5%85%A5%E4%B9%8B%E5%8F%8C%E6%9F%A5%E8%AF%A2%E6%B3%A8%E5%85%A5/">文章</a>。</p>
-<h5 id="4-其他"><a href="#4-其他" class="headerlink" title="4.其他"></a>4.其他</h5><h6 id="列名重复"><a href="#列名重复" class="headerlink" title="列名重复"></a>列名重复</h6><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from (select name_const(version(),1),name_const(version(),1))x;</span><br><span class="line">ERROR 1060 (42S21): Duplicate column name '5.7.11'</span><br></pre></td></tr></table></figure>
-
-<h6 id="（其他待补充，后面实际遇到了会补充进来）"><a href="#（其他待补充，后面实际遇到了会补充进来）" class="headerlink" title="（其他待补充，后面实际遇到了会补充进来）"></a>（其他待补充，后面实际遇到了会补充进来）</h6><h4 id="0x02-references"><a href="#0x02-references" class="headerlink" title="0x02 references"></a>0x02 references</h4><p><a href="https://xz.aliyun.com/t/253" target="_blank" rel="noopener">https://xz.aliyun.com/t/253</a></p>
-<p>[<a href="https://v0w.top/2018/08/03/MySQL%20%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5/]" target="_blank" rel="noopener">https://v0w.top/2018/08/03/MySQL%20%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5/]</a>(<a href="https://v0w.top/2018/08/03/MySQL" target="_blank" rel="noopener">https://v0w.top/2018/08/03/MySQL</a> 报错注入/)</p>
-
-          
+          <h4 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h4><p>报错注入也就是利用报错信息查询到自己想要的内容。报错注入也有局限性，那就是要求页面必须对报错信息有回显。报错的方法非常多，前面写过一篇文章讲双查询注入的，理论上也属于报错注入的一种，所以在这里总结一下报错注入的多种姿势。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/02/22/SQL注入之报错注入/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
