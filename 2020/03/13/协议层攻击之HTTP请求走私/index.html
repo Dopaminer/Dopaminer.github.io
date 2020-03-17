@@ -87,18 +87,17 @@
 <meta property="og:site_name" content="Dopamine&#39;s Blog">
 <meta property="og:description" content="0x00 前言在做Roarctf2019 Easy calc这道题的时候，一般的解法都是利用php对查询字符串的解析特性来绕过waf，但是后来看到大佬说还可以利用http请求走私来绕过waf执行命令，于是来学习一下。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://dopaminer.github.io/2020/03/13/协议层攻击之HTTP请求走私/dopamineblog.oss-accelerate.aliyuncs.com/img/72d92c0e4849c70568409dc573538fd.png">
-<meta property="og:image" content="http://q65bxiop3.bkt.clouddn.com/img/20200312234043.png">
+<meta property="og:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200312234043.png">
 <meta property="og:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200312234542.png">
 <meta property="og:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200312235556.png">
 <meta property="og:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200312235647.png">
 <meta property="og:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200312235955.png">
 <meta property="og:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200313000559.png">
-<meta property="og:updated_time" content="2020-03-17T08:10:12.783Z">
+<meta property="og:updated_time" content="2020-03-17T08:38:11.564Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="协议层攻击之HTTP请求走私">
 <meta name="twitter:description" content="0x00 前言在做Roarctf2019 Easy calc这道题的时候，一般的解法都是利用php对查询字符串的解析特性来绕过waf，但是后来看到大佬说还可以利用http请求走私来绕过waf执行命令，于是来学习一下。">
-<meta name="twitter:image" content="https://dopaminer.github.io/2020/03/13/协议层攻击之HTTP请求走私/dopamineblog.oss-accelerate.aliyuncs.com/img/72d92c0e4849c70568409dc573538fd.png">
+<meta name="twitter:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200312234043.png">
 
 
 
@@ -318,7 +317,7 @@
       
 
       
-        <h3 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h3><p>在做Roarctf2019 Easy calc这道题的时候，一般的解法都是利用php对查询字符串的解析特性来绕过waf，但是后来看到大佬说还可以利用http请求走私来绕过waf执行命令，于是来学习一下。<br><img src="dopamineblog.oss-accelerate.aliyuncs.com/img/72d92c0e4849c70568409dc573538fd.png" alt></p>
+        <h3 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h3><p>在做Roarctf2019 Easy calc这道题的时候，一般的解法都是利用php对查询字符串的解析特性来绕过waf，但是后来看到大佬说还可以利用http请求走私来绕过waf执行命令，于是来学习一下。</p>
 <a id="more"></a>
 
 <h3 id="0x01-关于HTTP请求走私"><a href="#0x01-关于HTTP请求走私" class="headerlink" title="0x01 关于HTTP请求走私"></a>0x01 关于HTTP请求走私</h3><h5 id="1-HTTP请求走私是什么"><a href="#1-HTTP请求走私是什么" class="headerlink" title="1.HTTP请求走私是什么"></a>1.HTTP请求走私是什么</h5><p>http请求走私属于协议层攻击，属于服务器漏洞的一种。这是一种干扰网站处理从一个或者多个用户接受的http请求序列的方式的技术，使攻击者可以绕过安全控制，未经授权访问敏感数据并直接危害其他应用程序用户。</p>
@@ -374,7 +373,7 @@
 <p>不用多说了吧，应该很好理解攻击流程。</p>
 <h3 id="0x03-RoarCTF2019-Easy-calc"><a href="#0x03-RoarCTF2019-Easy-calc" class="headerlink" title="0x03 RoarCTF2019  Easy calc"></a>0x03 RoarCTF2019  Easy calc</h3><p>漏洞介绍完毕，下面来实战。</p>
 <p>这一题，打开是一个计算器，然后注释提示有waf，在calc.php页面也有源码泄露</p>
-<p><img src="http://q65bxiop3.bkt.clouddn.com/img/20200312234043.png" alt></p>
+<p><img src="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200312234043.png" alt></p>
 <p>calc.php</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line"><span class="keyword">if</span>(!<span class="keyword">isset</span>($_GET[<span class="string">'num'</span>]))&#123;</span><br><span class="line">    show_source(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        $str = $_GET[<span class="string">'num'</span>];</span><br><span class="line">        $blacklist = [<span class="string">' '</span>, <span class="string">'\t'</span>, <span class="string">'\r'</span>, <span class="string">'\n'</span>,<span class="string">'\''</span>, <span class="string">'"'</span>, <span class="string">'`'</span>, <span class="string">'\['</span>, <span class="string">'\]'</span>,<span class="string">'\$'</span>,<span class="string">'\\'</span>,<span class="string">'\^'</span>];</span><br><span class="line">        <span class="keyword">foreach</span> ($blacklist <span class="keyword">as</span> $blackitem) &#123;</span><br><span class="line">                <span class="keyword">if</span> (preg_match(<span class="string">'/'</span> . $blackitem . <span class="string">'/m'</span>, $str)) &#123;</span><br><span class="line">                        <span class="keyword">die</span>(<span class="string">"what are you want to do?"</span>);</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">eval</span>(<span class="string">'echo '</span>.$str.<span class="string">';'</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 
