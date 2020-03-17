@@ -110,10 +110,10 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200223122159.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200223154102.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200223154255.png">
-<meta property="og:image" content="http://q65bxiop3.bkt.clouddn.com/img/20200223163306.png">
-<meta property="og:image" content="http://q65bxiop3.bkt.clouddn.com/img/20200224084440.png">
-<meta property="og:image" content="http://q65bxiop3.bkt.clouddn.com/img/20200224101834.png">
-<meta property="og:updated_time" content="2020-02-24T02:33:24.423Z">
+<meta property="og:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200223163306.png">
+<meta property="og:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200224084440.png">
+<meta property="og:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200224101834.png">
+<meta property="og:updated_time" content="2020-03-17T08:03:28.870Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="BUUCTF sqli-labs 刷题记录（1-20）">
 <meta name="twitter:description" content="因为做的是buuctf给的环境，所以这里的目标是拿到flag。">
@@ -467,11 +467,11 @@
 <p><img src="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200223154255.png" alt></p>
 <p>这里把user-agent和ip以及uname的内容都插入数据库中，而且并没有过滤，因此这是一个很好的注入点，但是考虑到uname有过滤，ip也不容易修改，所以将注入点定为user-agent。</p>
 <p>bp抓包，改user-agent，因为有回显，先尝试了一下union注入，发现好像并不行，而且有给出报错内容，所以选用报错注入。</p>
-<p><img src="http://q65bxiop3.bkt.clouddn.com/img/20200223163306.png" alt></p>
+<p><img src="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200223163306.png" alt></p>
 <h5 id="Less-19"><a href="#Less-19" class="headerlink" title="Less-19"></a>Less-19</h5><p>和上一关差不多，输入了正确的uname&amp;passwd，显示出了Referer，看来这次的注入点就是在Referer了。</p>
-<p><img src="http://q65bxiop3.bkt.clouddn.com/img/20200224084440.png" alt></p>
+<p><img src="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200224084440.png" alt></p>
 <h5 id="Less-20"><a href="#Less-20" class="headerlink" title="Less-20"></a>Less-20</h5><p>根据提示，这题是在cookie位置注入，但是这题好像没有cookie，直接在bp给他添加就好了。</p>
-<p><img src="http://q65bxiop3.bkt.clouddn.com/img/20200224101834.png" alt></p>
+<p><img src="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200224101834.png" alt></p>
 
       
     </div>

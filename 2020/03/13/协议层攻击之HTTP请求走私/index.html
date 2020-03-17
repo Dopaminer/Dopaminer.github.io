@@ -89,12 +89,12 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://dopaminer.github.io/2020/03/13/协议层攻击之HTTP请求走私/dopamineblog.oss-accelerate.aliyuncs.com/img/72d92c0e4849c70568409dc573538fd.png">
 <meta property="og:image" content="http://q65bxiop3.bkt.clouddn.com/img/20200312234043.png">
-<meta property="og:image" content="http://q65bxiop3.bkt.clouddn.com/img/20200312234542.png">
-<meta property="og:image" content="http://q65bxiop3.bkt.clouddn.com/img/20200312235556.png">
-<meta property="og:image" content="http://q65bxiop3.bkt.clouddn.com/img/20200312235647.png">
-<meta property="og:image" content="http://q65bxiop3.bkt.clouddn.com/img/20200312235955.png">
-<meta property="og:image" content="http://q65bxiop3.bkt.clouddn.com/img/20200313000559.png">
-<meta property="og:updated_time" content="2020-03-17T07:10:06.861Z">
+<meta property="og:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200312234542.png">
+<meta property="og:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200312235556.png">
+<meta property="og:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200312235647.png">
+<meta property="og:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200312235955.png">
+<meta property="og:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200313000559.png">
+<meta property="og:updated_time" content="2020-03-17T08:10:12.783Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="协议层攻击之HTTP请求走私">
 <meta name="twitter:description" content="0x00 前言在做Roarctf2019 Easy calc这道题的时候，一般的解法都是利用php对查询字符串的解析特性来绕过waf，但是后来看到大佬说还可以利用http请求走私来绕过waf执行命令，于是来学习一下。">
@@ -380,20 +380,20 @@
 
 <p>这里可以明确了，前端有waf，后端有字符黑名单，过滤了部分字符，因为有eval函数，所以这里应该是个命令执行漏洞，所以我们需要的就是绕过waf执行命令。</p>
 <p>测试的时候发现一些字符输入后返回403，那么猜测可能是走私报错，所以尝试http走私漏洞，尝试后发现确实存在这个走私漏洞。</p>
-<p><img src="http://q65bxiop3.bkt.clouddn.com/img/20200312234542.png" alt></p>
+<p><img src="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200312234542.png" alt></p>
 <p>框起来的部分就是改动的地方。</p>
-<p><img src="http://q65bxiop3.bkt.clouddn.com/img/20200312235556.png" alt></p>
+<p><img src="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200312235556.png" alt></p>
 <p>虽然400了，但是还是可以看到phpinfo()执行成功</p>
-<p><img src="http://q65bxiop3.bkt.clouddn.com/img/20200312235647.png" alt></p>
+<p><img src="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200312235647.png" alt></p>
 <p>测试后发现CL-CL，CL-TE等都可以进行http走私。</p>
 <p>于是可以开始命令执行了。</p>
-<p><img src="http://q65bxiop3.bkt.clouddn.com/img/20200312235955.png" alt></p>
+<p><img src="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200312235955.png" alt></p>
 <p>至于为什么这么构造，因为waf应该是过滤掉了英文字母和<code>/</code>以及很多字符，所以这里用<code>chr()</code>函数实现转换。</p>
 <p>看到这里有一个flagg，试图读取文件。</p>
 <p>payload：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?num=file_get_contents(chr(47).chr(102).chr(49).chr(97).chr(103).chr(103))</span><br></pre></td></tr></table></figure>
 
-<p><img src="http://q65bxiop3.bkt.clouddn.com/img/20200313000559.png" alt></p>
+<p><img src="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200313000559.png" alt></p>
 <p>得到flag.</p>
 <h3 id="0x04-references"><a href="#0x04-references" class="headerlink" title="0x04 references"></a>0x04 references</h3><p><a href="https://www.cnblogs.com/wangtanzhi/p/11884607.html" target="_blank" rel="noopener">https://www.cnblogs.com/wangtanzhi/p/11884607.html</a></p>
 <p><a href="https://xz.aliyun.com/t/6654" target="_blank" rel="noopener">https://xz.aliyun.com/t/6654</a></p>
