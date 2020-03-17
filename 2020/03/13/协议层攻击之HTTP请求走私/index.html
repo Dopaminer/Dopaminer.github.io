@@ -87,17 +87,18 @@
 <meta property="og:site_name" content="Dopamine&#39;s Blog">
 <meta property="og:description" content="0x00 前言在做Roarctf2019 Easy calc这道题的时候，一般的解法都是利用php对查询字符串的解析特性来绕过waf，但是后来看到大佬说还可以利用http请求走私来绕过waf执行命令，于是来学习一下。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://dopaminer.github.io/2020/03/13/协议层攻击之HTTP请求走私/dopamineblog.oss-accelerate.aliyuncs.com/img/72d92c0e4849c70568409dc573538fd.png">
 <meta property="og:image" content="http://q65bxiop3.bkt.clouddn.com/img/20200312234043.png">
 <meta property="og:image" content="http://q65bxiop3.bkt.clouddn.com/img/20200312234542.png">
 <meta property="og:image" content="http://q65bxiop3.bkt.clouddn.com/img/20200312235556.png">
 <meta property="og:image" content="http://q65bxiop3.bkt.clouddn.com/img/20200312235647.png">
 <meta property="og:image" content="http://q65bxiop3.bkt.clouddn.com/img/20200312235955.png">
 <meta property="og:image" content="http://q65bxiop3.bkt.clouddn.com/img/20200313000559.png">
-<meta property="og:updated_time" content="2020-03-12T16:10:40.069Z">
+<meta property="og:updated_time" content="2020-03-17T07:10:06.861Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="协议层攻击之HTTP请求走私">
 <meta name="twitter:description" content="0x00 前言在做Roarctf2019 Easy calc这道题的时候，一般的解法都是利用php对查询字符串的解析特性来绕过waf，但是后来看到大佬说还可以利用http请求走私来绕过waf执行命令，于是来学习一下。">
-<meta name="twitter:image" content="http://q65bxiop3.bkt.clouddn.com/img/20200312234043.png">
+<meta name="twitter:image" content="https://dopaminer.github.io/2020/03/13/协议层攻击之HTTP请求走私/dopamineblog.oss-accelerate.aliyuncs.com/img/72d92c0e4849c70568409dc573538fd.png">
 
 
 
@@ -317,7 +318,7 @@
       
 
       
-        <h3 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h3><p>在做Roarctf2019 Easy calc这道题的时候，一般的解法都是利用php对查询字符串的解析特性来绕过waf，但是后来看到大佬说还可以利用http请求走私来绕过waf执行命令，于是来学习一下。</p>
+        <h3 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h3><p>在做Roarctf2019 Easy calc这道题的时候，一般的解法都是利用php对查询字符串的解析特性来绕过waf，但是后来看到大佬说还可以利用http请求走私来绕过waf执行命令，于是来学习一下。<br><img src="dopamineblog.oss-accelerate.aliyuncs.com/img/72d92c0e4849c70568409dc573538fd.png" alt></p>
 <a id="more"></a>
 
 <h3 id="0x01-关于HTTP请求走私"><a href="#0x01-关于HTTP请求走私" class="headerlink" title="0x01 关于HTTP请求走私"></a>0x01 关于HTTP请求走私</h3><h5 id="1-HTTP请求走私是什么"><a href="#1-HTTP请求走私是什么" class="headerlink" title="1.HTTP请求走私是什么"></a>1.HTTP请求走私是什么</h5><p>http请求走私属于协议层攻击，属于服务器漏洞的一种。这是一种干扰网站处理从一个或者多个用户接受的http请求序列的方式的技术，使攻击者可以绕过安全控制，未经授权访问敏感数据并直接危害其他应用程序用户。</p>
