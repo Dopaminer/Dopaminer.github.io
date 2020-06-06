@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="writeup,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="只记录部分对自己来说有价值的。MISC啥都能考，所以要大开脑洞，脑洞没那么大，就要多学多见。很菜，所以要努力。">
+<meta name="keywords" content="writeup">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BUUOJ MISC 刷题记录（1-20）">
+<meta property="og:url" content="https://dopaminer.github.io/2020/04/10/BUUOJ MISC 刷题记录/index.html">
+<meta property="og:site_name" content="Dopamine&#39;s Blog">
+<meta property="og:description" content="只记录部分对自己来说有价值的。MISC啥都能考，所以要大开脑洞，脑洞没那么大，就要多学多见。很菜，所以要努力。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200201205027.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200201205418.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200202123531.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200204095957.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200204100550.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/1581821059(1).png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200207123701.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200207155326.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200207155622.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200207161306.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200207163439.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200208103555.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200208113616.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200210180633.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200212110716.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200212111019.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200212111300.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200212110533.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200212142854.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200213110344.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200213141954.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200218185505.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200218185641.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200218191005.png">
+<meta property="og:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200225084544.png">
+<meta property="og:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200225085111.png">
+<meta property="og:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200225095929.png">
+<meta property="og:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200225100646.png">
+<meta property="og:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200225102021.png">
+<meta property="og:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200318222519.png">
+<meta property="og:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200318230900.png">
+<meta property="og:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200318231911.png">
+<meta property="og:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200318235717.png">
+<meta property="og:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200318235807.png">
+<meta property="og:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200319213143.png">
+<meta property="og:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200319213416.png">
+<meta property="og:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200319213925.png">
+<meta property="og:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200319222116.png">
+<meta property="og:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200319222647.png">
+<meta property="og:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200319223223.png">
+<meta property="og:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/1584711192(1).jpg">
+<meta property="og:updated_time" content="2020-06-06T03:26:24.993Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="BUUOJ MISC 刷题记录（1-20）">
+<meta name="twitter:description" content="只记录部分对自己来说有价值的。MISC啥都能考，所以要大开脑洞，脑洞没那么大，就要多学多见。很菜，所以要努力。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200201205027.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://dopaminer.github.io/2020/04/10/BUUOJ MISC 刷题记录/">
+
+
+
+
+
+  <title>BUUOJ MISC 刷题记录（1-20） | Dopamine's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Dopamine's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://dopaminer.github.io/2020/04/10/BUUOJ MISC 刷题记录/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="D0pamine">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/头像.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dopamine's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">BUUOJ MISC 刷题记录（1-20）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-10T16:45:19+08:00">
+                2020-04-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>只记录部分对自己来说有价值的。MISC啥都能考，所以要大开脑洞，脑洞没那么大，就要多学多见。很菜，所以要努力。</p>
+<a id="more"></a>
+
+<h4 id="0x01-总结一些MISC的套路-可以只是给自己看，到时候删"><a href="#0x01-总结一些MISC的套路-可以只是给自己看，到时候删" class="headerlink" title="0x01 总结一些MISC的套路(可以只是给自己看，到时候删)"></a>0x01 总结一些MISC的套路(可以只是给自己看，到时候删)</h4><p>1.图片里面藏压缩包，可以用binwalk分离出来，cd到图片目录然后binwalk xxx.png -e</p>
+<p>2.爆破密码可以用fcrackzip。参数看这个<a href="https://blog.csdn.net/weixin_43272781/article/details/100751375" target="_blank" rel="noopener">文章</a>。</p>
+<p>3.看到一些奇奇怪怪的东西，比如损坏的文件，不能读的文件，程序，就脑洞一下，用strings提取里面的可读文字看看。</p>
+<h4 id="0x02-正片"><a href="#0x02-正片" class="headerlink" title="0x02 正片"></a>0x02 正片</h4><h5 id="1-二维码"><a href="#1-二维码" class="headerlink" title="1.二维码"></a>1.二维码</h5><p>刚开始给了一张二维码，扫了一下说“secret is here”，说明提示图片中隐藏了东西，于是用binwalk拆出来</p>
+<p><img src="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200201205027.png" alt></p>
+<p>发现藏了一个压缩包，要密码。还有一个txt文件写着4number，也就是提示压缩包密码是四位数字，所以用fcrackzip爆破密码。关于fcrackzip的参数设置看这篇<a href="https://blog.csdn.net/weixin_43272781/article/details/100751375" target="_blank" rel="noopener">文章</a>。</p>
+<p><img src="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200201205418.png" alt></p>
+<p>得到以后打开压缩包，里面就是flag。</p>
+<h5 id="2-N种方法解决"><a href="#2-N种方法解决" class="headerlink" title="2.N种方法解决"></a>2.N种方法解决</h5><p> 虽然说了N种方法，但我目前好像只看到一种…</p>
+<p>给了一个exe文件，但是无法执行，一般没头绪的时候，都可以用strings命令查看一下文件中可打印字符，可能会有些收获。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">strings KEY.exe</span><br><span class="line">data:image/jpg;base64,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</span><br></pre></td></tr></table></figure>
+
+<p>这里出来了一串字符，看样子后面是base64，实际上这个是RFC2397协议。Data URL scheme定义了一种新的URL数据方案。因为有些应用程序需要将一些小型的媒体数据类型直接嵌入到网页中，减少请求资源的链接数。浏览器接收到数据后解码并渲染形成图片。</p>
+<p><strong>格式</strong>：data:[&lt;mediatype&gt;][;base64],&lt;data&gt;</p>
+<p>mediatype是数据的类型，分为类型和子类型。base64是支持的编码模式。都好后面是嵌入的数据。</p>
+<p>这里直接拿去在线base64转换成图片，注意要保留前面的头部，然后得到一张二维码图片，扫描得到flag。</p>
+<h5 id="3-大白"><a href="#3-大白" class="headerlink" title="3.大白"></a>3.大白</h5><p>hint：看不到图？是不是屏幕太小了</p>
+<p>这个提示说明图片尺寸可能是有问题的，并且发现这个图片在windows能打开而linux打不开，所以打开winhex查看一下</p>
+<p><img src="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200202123531.png" alt></p>
+<p>粗浅分析一下png图像文件的十六进制结构结构吧。就以上图的框为单位。后面的暂时不分析了。</p>
+<p><strong>89 50 4E 47 0D 0A 1A 0A</strong>      PNG文件头，8字节数据组成，<strong>50 4E 47</strong>对应的ASCII值为“PNG”</p>
+<p><strong>00 00 00 0D</strong>      文件头的数据长度，00 00 00 0D=13</p>
+<p><strong>49 48 44 52</strong>       数据块类型标志，ASCII值为IHDR</p>
+<p><strong>00 00 02 A7</strong>      图像的宽度， 00 00 02 A7=679</p>
+<p><strong>00 00 01 00</strong>       图像的高度，00 00 01 00=256</p>
+<p><strong>08</strong>      色深，表示2的8次幂等于256色</p>
+<p><strong>06</strong>      表示索引图像</p>
+<p><strong>00</strong>      表示使用Deflate压缩编码压缩图像数据</p>
+<p><strong>00</strong>      表示为将来使用更好的压缩方法预留</p>
+<p><strong>00</strong>      表示非隔行扫描</p>
+<p>这里我们发现，图像的高度有问题，和宽度不匹配，导致在linux里面无法打开，并且根据提示，应该是改了图像高度而隐藏了flag，所以直接把高度改成和宽度一样，然后生成图片，就能看到flag了。</p>
+<h5 id="4-你竟然赶我走"><a href="#4-你竟然赶我走" class="headerlink" title="4.你竟然赶我走"></a>4.你竟然赶我走</h5><p>这又是一个让我迷思的题。。用winhex打开图片拉到底部或者stegsolve查看file format也能在最后看到。</p>
+<p>可是跟这个题的名字有啥关系</p>
+<h5 id="5-LSB"><a href="#5-LSB" class="headerlink" title="5. LSB"></a>5. LSB</h5><p>看名字就知道是LSB隐写，推荐一下这篇<a href="https://segmentfault.com/a/1190000016223897?utm_source=tag-newest" target="_blank" rel="noopener">文章</a>，基础知识还是要有的。</p>
+<p>但是我方向还是错了，发现了RGB的0通道顶上都有谜之斑点以后，我猜想是不是上面那一条就是flag信息，然后就提取了三通道各种异或…并没有用。</p>
+<p><img src="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200204095957.png" alt></p>
+<p>看了别人的解法，才知道是要把三个通道结合起来，然后导出图片，就可以得到一张二维码，扫描得flag。</p>
+<p><img src="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200204100550.png" alt></p>
+<h5 id="6-wireshark"><a href="#6-wireshark" class="headerlink" title="6.wireshark"></a>6.wireshark</h5><p>给了一个流量包，说是管理员登陆网站时的流量，管理员的密码就是flag。</p>
+<p>说来其实一直都不太能熟练使用wireshark，这里有一篇<a href="https://www.jianshu.com/p/55ec409c739e" target="_blank" rel="noopener">教程</a>可以参考，写的还算详细了。</p>
+<p>直接搜索了password，定位到下图的包中，可以在里面找到flag。</p>
+<p><img src="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/1581821059(1).png" alt></p>
+<h5 id="7-爱因斯坦"><a href="#7-爱因斯坦" class="headerlink" title="7.爱因斯坦"></a>7.爱因斯坦</h5><p>图片拖到binwalk里分离出zip，爆了好久都没有爆出密码，其实一早就看到了这里</p>
+<p><img src="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200207123701.png" alt></p>
+<p>只不过我理所当然的觉得这个应该是混淆视听的东西而已，后来看wp发现这就是压缩包的密码…</p>
+<p>地铁老人看手机.jpg</p>
+<p>只能说…misc就是有太多地方需要开脑洞，所以还是…多尝试多尝试。</p>
+<h5 id="8-被嗅探的流量"><a href="#8-被嗅探的流量" class="headerlink" title="8.被嗅探的流量"></a>8.被嗅探的流量</h5><p>题目描述这是一段文件传输的流量，个人习惯是先过滤出http看一下，然后发现一个上传图片的请求，就点进去，结果稀里糊涂的点了最下边界面的frame就看到flag了…</p>
+<p><img src="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200207155326.png" alt></p>
+<p>说实话到现在我也没明白是为什么，而实际真正的做法应该是追踪这个请求的tcp流，然后就可以在里面搜索得到flag了。</p>
+<p><img src="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200207155622.png" alt></p>
+<p>wireshark掌握不熟练，不过本质应该是计网没学好，所以下学期要认真鸭。</p>
+<h5 id="9-假如给我三天光明"><a href="#9-假如给我三天光明" class="headerlink" title="9.假如给我三天光明"></a>9.假如给我三天光明</h5><p>这题挺好玩的，看题目名字和猜想给的是盲文，找了个对照表</p>
+<p><img src="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200207161306.png" alt></p>
+<p>解出来就是压缩包密码，然而我以为是大写的，输了好几遍都是错的，整懵了，后来才发现是小写的密码。</p>
+<p>打开压缩包，里面是一段音频，给了一段电报的声音，用audacity打开</p>
+<p><img src="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200207163439.png" alt></p>
+<p>就是摩斯电码，扒下来</p>
+<blockquote>
+<p>-.-. - ..-. .– .–. . .. —– —.. –… …– ..— ..–.. ..— …– -.. –..</p>
+</blockquote>
+<p>拿去这个<a href="http://www.zhongguosou.com/zonghe/moErSiCodeConverter.aspx" target="_blank" rel="noopener">网站</a>解密，得到</p>
+<blockquote>
+<p>CTFWPEI08732?23DZ</p>
+</blockquote>
+<p>去掉ctf，包上flag{}交了一下发现是错误的，因为摩斯电码不分大小写，所以全部改成小写，正确了。</p>
+<h5 id="10-FLAG"><a href="#10-FLAG" class="headerlink" title="10.FLAG"></a>10.FLAG</h5><p>这题给了一张png图片，因为是png所以就下意识的打开了stegsolve然后又习惯性的RGB叠加看了一下…</p>
+<p><img src="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200208103555.png" alt></p>
+<p>原来藏了一个zip文件，save bin拿出来看一下，解压发现里面是一个elf文件（用file命令查看），鉴于我没有IDA，就直接用strings命令读了</p>
+<p><img src="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200208113616.png" alt></p>
+<h5 id="11-荷兰宽带数据泄露"><a href="#11-荷兰宽带数据泄露" class="headerlink" title="11.荷兰宽带数据泄露"></a>11.荷兰宽带数据泄露</h5><p>给了一个bin文件，直接打开就是乱码，结合题目，感觉给的是路由器配置文件，所以用routepassview打开，下一步就是找了半天flag…后来得知flag是username的内容…我寻思这也没听说啊。</p>
+<p><img src="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200210180633.png" alt></p>
+<h5 id="12-梅花香之苦寒来"><a href="#12-梅花香之苦寒来" class="headerlink" title="12.梅花香之苦寒来"></a>12.梅花香之苦寒来</h5><p>给了一个jpg文件，用winhex打开查看，发现后面拼接了很多规律的数字+字母混合字符串</p>
+<p><img src="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200212110716.png" alt></p>
+<p>有经验了就很容易联想到这是十六进制，尝试转ascii码，发现全是坐标</p>
+<p><img src="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200212111019.png" alt></p>
+<p>于是尝试用gnuplot把图案画出来，首先要把坐标转换成gnuplot能识别的格式，即去掉括号，逗号改成空格</p>
+<p><img src="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200212111300.png" alt></p>
+<p>再用gnuplot画出来，可以看到是一个二维码，扫描得flag。</p>
+<p><img src="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200212110533.png" alt></p>
+<h5 id="13-snake"><a href="#13-snake" class="headerlink" title="13.snake"></a>13.snake</h5><p>果然遇到有点点水平的题我就做不出来。</p>
+<p>刚开始给了一张jpg，然后binwalk分析出一个压缩包，解压后里面有一个key.txt和一个data文件，命名为”cipher”，翻译为”密码“。txt里有一句base64编码的话，解码后是</p>
+<blockquote>
+<p>What is Nicki Minaj’s favorite song that refers to snakes?</p>
+</blockquote>
+<p>百度搜了一下Nicki Minaj关于蛇的歌，第一个出来就是Anaconda，自己分析的是，另一个文件应该是加密过的，可能解密出来就是flag，所以key.txt里面分析出来的anaconda应该就是密钥，然而怎么加密的我就不懂了。</p>
+<p>后来看了大佬的wp，发现是这样的逻辑：snake -&gt; 蛇 -&gt; serpent，再一查serpent是一种加密算法，也是曾经AES的五个候选算法之一，具体的算法没有了解太深，还有一个很不错的<a href="http://serpent.online-domain-tools.com/" target="_blank" rel="noopener">在线解密网站</a>，可以直接把文件传输上去提交密钥加密解密，这里直接解出来，就是flag了。</p>
+<p><img src="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200212142854.png" alt></p>
+<p>这题脑洞也是挺大的…只能说自己还不够敏锐吧，没有察觉到题目的信息。</p>
+<h5 id="14-面具下的flag"><a href="#14-面具下的flag" class="headerlink" title="14.面具下的flag"></a>14.面具下的flag</h5><p>binwalk在图片里提取出zip，解压发现需要密码，查看了一下发现是伪加密，关于如何判断伪加密我这篇<a href="https://dopaminer.github.io/2020/02/12/ZIP%E4%BC%AA%E5%8A%A0%E5%AF%86/#more">文章</a>里有讲。解压出一个flag.vmdk，虚拟机磁盘文件。因为对这个文件不太了解，所以就用strings命令查看，发现里面有一些brainfuck加密的东西</p>
+<p><img src="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200213110344.png" alt></p>
+<p>但是好像有残缺，拼出来的flag和真正的有点差异，没办法辽。</p>
+<p>这题最后是要用7z解压这个文件，但是我的7z不知道为什么就是解压不了…然后发现了一个不错的<a href="https://extract.me/" target="_blank" rel="noopener">网站</a>，可以解压很多种文件，并且可以单个下载，挺牛逼的。</p>
+<p><img src="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200213141954.png" alt></p>
+<p>这两个文件里就是前后两段flag的brainfuck加密版本，在这个<a href="https://www.splitbrain.org/services/ook" target="_blank" rel="noopener">在线解密网站</a>解密，则得到完整flag。</p>
+<h5 id="15-数据包中的线索"><a href="#15-数据包中的线索" class="headerlink" title="15.数据包中的线索"></a>15.数据包中的线索</h5><p>分析数据包，先过滤出http协议，看着比较舒服，看到一个可疑的fenxi.php，于是追踪tcp流看一下</p>
+<p><img src="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200218185505.png" alt></p>
+<p><img src="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200218185641.png" alt></p>
+<p>这里感觉可能是base64吧，但看着也有出入，后来去看了别人的题解，说通过开头的<code>/9j/</code>看出是base64的图片，因为<code>/9j/</code>base64解码后是<code>\xff \xd8 \xff</code>，这三个字节是jpg文件开头三字节</p>
+<p><img src="https://raw.githubusercontent.com/Dopaminer/Figurebed/master/img/20200218191005.png" alt></p>
+<p>也是蛮玄妙的。</p>
+<p>于是有两种方法把他恢复成图片：一是找一个在线base64转换图片的网站，然后在开头添加上<code>data:image/jpg;base64,</code>，放到网站里去恢复成图片即可。第二种方法是，制作成html文件，代码为：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">img</span></span></span><br><span class="line"><span class="tag"><span class="attr">src</span>=<span class="string">”data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAI</span></span></span><br><span class="line"><span class="tag"><span class="attr">BAQIBAQICAg</span>…<span class="attr">..</span>”&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>然后浏览器打开即可看到图片。flag就在图片上。</p>
+<h5 id="16-刷新过的图片"><a href="#16-刷新过的图片" class="headerlink" title="16.刷新过的图片"></a>16.刷新过的图片</h5><p>根据提示，刷新 -&gt; F5 -&gt; F5隐写。</p>
+<p>用F5隐写工具分析一下</p>
+<p><img src="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200225084544.png" alt></p>
+<p>然后在F5的文件夹下面生成一个output文件，这里生成了一个output.txt，然后打开一看，发现是PK开头的，看来是个zip文件</p>
+<p><img src="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200225085111.png" alt></p>
+<p>直接把后缀改成zip，尝试解压，发现要密码。用winhex打开查看，发现是伪加密，改过来以后，解压，得flag。</p>
+<h5 id="17-中国菜刀666"><a href="#17-中国菜刀666" class="headerlink" title="17.中国菜刀666"></a>17.中国菜刀666</h5><p>又是流量取证。题目提示是中国菜刀，可以猜想是上传了马然后用菜刀连接这一系列的流量包，而且菜刀每次通讯使用的都是base64编码，知道这些以后，就去筛选出http流的数据看了看，随便打开一个，右键追踪http流</p>
+<p><img src="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200225095929.png" alt></p>
+<p>看到这里有个flag.txt，甚至还有zip，但是咱也不知道到底是什么意思，所以就继续看http流，反正也不多，而且个人技巧是length从大到小排，毕竟内容多一点的话说不定就能找到一些东西。</p>
+<p>最长的http流里一眼看去一大堆码，仔细一看发现了FFD8，熟悉的就知道这是jpg的头，所以看来这一大堆就是jpg的十六进制。打开winhex，创建一个新文件，把这堆东西复制进去，生成jpg文件。</p>
+<p><img src="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200225100646.png" alt></p>
+<p>图上的好像是密码，但是具体是什么的密码，也不清楚，想起前面看到的hello.zip和flag.txt，直觉就是这是压缩包的密码，然后压缩包解开之后有flag.txt。到这开始有两条路可以走，一是有点经验的就直接binwalk拆出来zip，然后直接解压就好了。二是我这种呆比，不熟悉业务，只能继续傻傻的看各种流。（聪明一点的话也可以选择尝试查找PK省点事）</p>
+<p><img src="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200225102021.png" alt></p>
+<p>然后就在一个流里看到了这一串东西，再次拿到winhex里生成zip文件，然后解压发现需要密码，把上图的密码输入进去，果然就解压成功，里面就是flag。</p>
+<p>顺便一提这篇<a href="https://cloud.tencent.com/developer/article/1073556" target="_blank" rel="noopener">文章</a>分析的很详细。</p>
+<h5 id="18-GUET-CTF2019-虚假的压缩包"><a href="#18-GUET-CTF2019-虚假的压缩包" class="headerlink" title="18.[GUET-CTF2019]虚假的压缩包"></a>18.[GUET-CTF2019]虚假的压缩包</h5><p>给了两个包，虚假的压缩包&amp;真实的压缩包。虚假的那个发现是伪加密，然后打开以后有个key.txt</p>
+<p><img src="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200318222519.png" alt></p>
+<p>这个应该是RSA吧，意思是密文是26，然后求明文？这个算出来明文应该是5吧。</p>
+<p>可是5也不是真压缩包的密码…后来看了wp，原来密码是：答案是5</p>
+<p>上面那个key.txt相当于给了横杠提示，横杠下面就是密码…..这谁看了不想暴打出题人。</p>
+<p> 解压真实的压缩包后，得到一个图片和一个文件。</p>
+<p>文件里面是一堆乱七八糟的数字字母组合，也看不出是什么编码，暂且没什么头绪，所以有关这个文件的其他信息看来就要从图片里获取了。</p>
+<p>图片例行公事拖到winhex里看一下，发现文件头是PNG，但是后缀被改成了jpg。改回png之后，发现在linux里还是打不开图片，因为图片的长宽不符合比例，猜测可能是改过，所以又开winhex把长改得高一些。（正常来说还是改的偏高一些合适，如果改成和长宽中大的那一个相同，也可能出现还不够看到隐藏信息高度的情况，所以还是一不做二不休改高一点好）</p>
+<p><img src="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200318230900.png" alt></p>
+<p>如图把<code>00 B2</code>改成<code>06 C6</code>（这是随手改的数字，反正偏大就好了）。</p>
+<p><img src="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200318231911.png" alt></p>
+<p>然后还真的看到了隐藏信息，异或5.</p>
+<p>看来文件是把ascii转成16进制，然后异或5加密过的。所以用一个脚本解密回去就好了。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">f1 = open(<span class="string">'./file'</span>,<span class="string">'r'</span>)</span><br><span class="line">xor_data = f1.read()</span><br><span class="line">f1.close()</span><br><span class="line">dec_data = <span class="string">""</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> xor_data:</span><br><span class="line">    tmp = int(i,<span class="number">16</span>) ^ <span class="number">5</span></span><br><span class="line">    dec_data += hex(tmp)[<span class="number">2</span>:]</span><br><span class="line">f2 = open(<span class="string">'./data.doc'</span>,<span class="string">'wb'</span>)</span><br><span class="line">f2.write(dec_data.decode(<span class="string">'hex'</span>))</span><br><span class="line">f2.close()</span><br></pre></td></tr></table></figure>
+
+<p>这里为什么直接存到doc里了呢，是因为解密后的16进制拉到winhex里能发现xml的头，保存为doc文件方便查看。</p>
+<p><img src="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200318235717.png" alt></p>
+<p>这么看还是什么都没有，，这里更骚，其实flag设置成了白色字体，这里把字体颜色换一下可以发现flag</p>
+<p><img src="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200318235807.png" alt></p>
+<p>当然也可以参考这篇<a href="https://www.cnblogs.com/mke2fs/p/10914708.html" target="_blank" rel="noopener">文章</a>的做法，查看xml文件，但是我没太看懂具体怎么做，就不班门弄斧了。</p>
+<h5 id="19-喵喵喵"><a href="#19-喵喵喵" class="headerlink" title="19.喵喵喵"></a>19.喵喵喵</h5><p>给了一张png猫猫图片，binwalk和winhex看了一下都没什么东西，就打开了stegsolve，发现在RGB的0通道，都有一条神秘的东西，而且其他地方全黑，这是不太正常的，可能考虑是LSB隐写。</p>
+<p><img src="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200319213143.png" alt></p>
+<p>然后就综合分析了一下RGB0通道，但是习惯是只看RGB，所以没发现什么东西，然而实际上要改成BGR</p>
+<p><img src="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200319213416.png" alt></p>
+<p>就能发现有一张png图片隐写在了里面。所以说，以后还是要把六个选项都试一试…反正也不太费事。</p>
+<p>把png转存，但是发现开头<code>FF FE</code>不是png的头，所以直接删掉，让<code>89 50</code>开头，不然会打不开图片文件。</p>
+<p>打开后会发现是一张二维码图片的一半。</p>
+<p><img src="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200319213925.png" alt></p>
+<p>感觉怪怪的，又用winhex打开了图片，发现这个图片的高宽不对劲，按说二维码应该是个正方形，于是把高改成和宽度一样的值，打开就发现是个完整的二维码了。这个二维码看起来还是怪怪的，和正常的对比了一下，发现是反色了，于是用stegsolve打开，xor通道，保存，在线扫码，得到一个百度网盘flag.rar文件。</p>
+<p>解压</p>
+<p><img src="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200319222116.png" alt></p>
+<p>太伤感情了…</p>
+<p>这里还有一个知识点，是NTFS隐写。因为这个rar用winrar解压的时候是会报错的</p>
+<p><img src="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200319222647.png" alt></p>
+<p>可以参考这篇<a href="https://www.cnblogs.com/Chesky/p/ALTERNATE_DATA_STREAMS.html" target="_blank" rel="noopener">文章</a>.</p>
+<p>用文章提到的工具NtfsStreamsEditor分析一下</p>
+<p><img src="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200319223223.png" alt></p>
+<p>勾选导出就好了。</p>
+<p>pyc是py程序编译后的文件，所以我们找一个<a href="https://tool.lu/pyc/" target="_blank" rel="noopener">在线反编译网站</a>反编译拿到py源码。</p>
+<p>反编译得到加密脚本：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">encode</span><span class="params">()</span>:</span></span><br><span class="line">    flag = <span class="string">'*************'</span></span><br><span class="line">    ciphertext = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(flag)):</span><br><span class="line">        s = chr(i ^ ord(flag[i]))</span><br><span class="line">        <span class="keyword">if</span> i % <span class="number">2</span> == <span class="number">0</span>:</span><br><span class="line">            s = ord(s) + <span class="number">10</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            s = ord(s) - <span class="number">10</span></span><br><span class="line">        ciphertext.append(str(s))</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> ciphertext[::<span class="number">-1</span>]  <span class="comment">#倒序一遍</span></span><br><span class="line"> </span><br><span class="line">ciphertext = [</span><br><span class="line">    <span class="string">'96'</span>,</span><br><span class="line">    <span class="string">'65'</span>,</span><br><span class="line">    <span class="string">'93'</span>,</span><br><span class="line">    <span class="string">'123'</span>,</span><br><span class="line">    <span class="string">'91'</span>,</span><br><span class="line">    <span class="string">'97'</span>,</span><br><span class="line">    <span class="string">'22'</span>,</span><br><span class="line">    <span class="string">'93'</span>,</span><br><span class="line">    <span class="string">'70'</span>,</span><br><span class="line">    <span class="string">'102'</span>,</span><br><span class="line">    <span class="string">'94'</span>,</span><br><span class="line">    <span class="string">'132'</span>,</span><br><span class="line">    <span class="string">'46'</span>,</span><br><span class="line">    <span class="string">'112'</span>,</span><br><span class="line">    <span class="string">'64'</span>,</span><br><span class="line">    <span class="string">'97'</span>,</span><br><span class="line">    <span class="string">'88'</span>,</span><br><span class="line">    <span class="string">'80'</span>,</span><br><span class="line">    <span class="string">'82'</span>,</span><br><span class="line">    <span class="string">'137'</span>,</span><br><span class="line">    <span class="string">'90'</span>,</span><br><span class="line">    <span class="string">'109'</span>,</span><br><span class="line">    <span class="string">'99'</span>,</span><br><span class="line">    <span class="string">'112'</span>]</span><br></pre></td></tr></table></figure>
+
+<p>这个还是挺简单的，随便写了一个解密脚本：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"></span><br><span class="line">ciphertext=[ <span class="string">'96'</span>,<span class="string">'65'</span>,<span class="string">'93'</span>,<span class="string">'123'</span>,<span class="string">'91'</span>,<span class="string">'97'</span>,<span class="string">'22'</span>,<span class="string">'93'</span>,<span class="string">'70'</span>,<span class="string">'102'</span>,<span class="string">'94'</span>,<span class="string">'132'</span>,<span class="string">'46'</span>,<span class="string">'112'</span>,<span class="string">'64'</span>,<span class="string">'97'</span>,<span class="string">'88'</span>,<span class="string">'80'</span>,<span class="string">'82'</span>,<span class="string">'137'</span>,<span class="string">'90'</span>,<span class="string">'109'</span>,<span class="string">'99'</span>,<span class="string">'112'</span>]</span><br><span class="line">ciphertext = ciphertext[::<span class="number">-1</span>]</span><br><span class="line">flag=<span class="string">''</span></span><br><span class="line">s=<span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,len(ciphertext)):</span><br><span class="line">	<span class="keyword">if</span> (i%<span class="number">2</span>==<span class="number">0</span>):</span><br><span class="line">		s=int(ciphertext[i])<span class="number">-10</span></span><br><span class="line">	<span class="keyword">else</span>:</span><br><span class="line">		s=int(ciphertext[i])+<span class="number">10</span></span><br><span class="line">	s=chr(i^s)</span><br><span class="line">	flag+=s</span><br><span class="line"></span><br><span class="line">print(flag)</span><br></pre></td></tr></table></figure>
+
+<p>运行得到flag。</p>
+<h5 id="20-RCTF2019-draw"><a href="#20-RCTF2019-draw" class="headerlink" title="20.[RCTF2019]draw"></a>20.[RCTF2019]draw</h5><p>给了一个txt文件，里面的东西乍一看不知道是啥，随便复制google了一下，发现是Logo语言，然后下载了一个MSWLogo，代码复制上去运行，画出了flag。</p>
+<p><img src="https://dopamineblog.oss-accelerate.aliyuncs.com/img/1584711192(1).jpg" alt></p>
+<p>这签到题怎么这么高分…迷惑。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/writeup/" rel="tag"># writeup</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/03/27/BJDCTF 2nd WriteUp/" rel="next" title="BJDCTF 2nd WriteUp">
+                <i class="fa fa-chevron-left"></i> BJDCTF 2nd WriteUp
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/04/20/BUUCTF Web 刷题记录1-15/" rel="prev" title="BUUCTF Web 刷题记录（1-15）">
+                BUUCTF Web 刷题记录（1-15） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/头像.jpg" alt="D0pamine">
+            
+              <p class="site-author-name" itemprop="name">D0pamine</p>
+              <p class="site-description motion-element" itemprop="description">Always for you.</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#0x01-总结一些MISC的套路-可以只是给自己看，到时候删"><span class="nav-number">1.</span> <span class="nav-text">0x01 总结一些MISC的套路(可以只是给自己看，到时候删)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#0x02-正片"><span class="nav-number">2.</span> <span class="nav-text">0x02 正片</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-二维码"><span class="nav-number">2.1.</span> <span class="nav-text">1.二维码</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-N种方法解决"><span class="nav-number">2.2.</span> <span class="nav-text">2.N种方法解决</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-大白"><span class="nav-number">2.3.</span> <span class="nav-text">3.大白</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-你竟然赶我走"><span class="nav-number">2.4.</span> <span class="nav-text">4.你竟然赶我走</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-LSB"><span class="nav-number">2.5.</span> <span class="nav-text">5. LSB</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6-wireshark"><span class="nav-number">2.6.</span> <span class="nav-text">6.wireshark</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#7-爱因斯坦"><span class="nav-number">2.7.</span> <span class="nav-text">7.爱因斯坦</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#8-被嗅探的流量"><span class="nav-number">2.8.</span> <span class="nav-text">8.被嗅探的流量</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#9-假如给我三天光明"><span class="nav-number">2.9.</span> <span class="nav-text">9.假如给我三天光明</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#10-FLAG"><span class="nav-number">2.10.</span> <span class="nav-text">10.FLAG</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#11-荷兰宽带数据泄露"><span class="nav-number">2.11.</span> <span class="nav-text">11.荷兰宽带数据泄露</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#12-梅花香之苦寒来"><span class="nav-number">2.12.</span> <span class="nav-text">12.梅花香之苦寒来</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#13-snake"><span class="nav-number">2.13.</span> <span class="nav-text">13.snake</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#14-面具下的flag"><span class="nav-number">2.14.</span> <span class="nav-text">14.面具下的flag</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#15-数据包中的线索"><span class="nav-number">2.15.</span> <span class="nav-text">15.数据包中的线索</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#16-刷新过的图片"><span class="nav-number">2.16.</span> <span class="nav-text">16.刷新过的图片</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#17-中国菜刀666"><span class="nav-number">2.17.</span> <span class="nav-text">17.中国菜刀666</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#18-GUET-CTF2019-虚假的压缩包"><span class="nav-number">2.18.</span> <span class="nav-text">18.[GUET-CTF2019]虚假的压缩包</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#19-喵喵喵"><span class="nav-number">2.19.</span> <span class="nav-text">19.喵喵喵</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#20-RCTF2019-draw"><span class="nav-number">2.20.</span> <span class="nav-text">20.[RCTF2019]draw</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">D0pamine</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

